@@ -59,12 +59,9 @@ ingredients:
         unit: "g"
         text: "cherrytomater, delt i to"
         groceryItems: ["cherry-tomato"]
-      - amount: 4
-        text: "store blader romanosalat, strimlet"
-        groceryItems: ["romaine"]
 tags: ["Proteinrik", "Langsomme karbohydrater", "Familievennlig"]
 adapted: true
-adaptationNote: "Olivenolje og ferdig tacokrydder er erstattet med ghee og enkeltkrydder. Salat og tomat er lagt til, og hot honey serveres separat."
+adaptationNote: "Olivenolje og ferdig tacokrydder er erstattet med ghee og enkeltkrydder. Tomat er lagt til, og hot honey serveres separat."
 ---
 
 Hot honey lages av rå honning, chiliflak, cayennepepper og eplecidereddik etter den lenkede MENY-oppskriften. Server den separat slik at hver person kan velge styrke selv.
@@ -75,9 +72,9 @@ Hot honey lages av rå honning, chiliflak, cayennepepper og eplecidereddik etter
 2. Bak søtpoteten i omtrent 20 minutter, til den er mør og har fått litt farge.
 3. Stek kjøttdeigen i smør på middels høy varme til den er gjennomstekt. Tilsett paprikapulver, spisskummen, hvitløkspulver, oregano og vann. La det frese i omtrent 2 minutter.
 4. Del avokadoen i terninger.
-5. Server romanosalat og cherrytomater først. Fordel deretter kjøttdeig, søtpotet, avokado og cottage cheese i to boller.
+5. Fordel cherrytomater, kjøttdeig, søtpotet, avokado og cottage cheese i to boller.
 6. Sett hot honey på bordet som et valgfritt tilbehør.
 
 ## Hvorfor den fungerer
 
-Kjøttdeig og cottage cheese gir måltidet en tydelig proteinkilde. Romanosalat og tomat tilfører grønnsaker og fiber, mens søtpotet gir langsomme karbohydrater som passer etter en aktiv dag. Hot honey serveres separat fordi familien foretrekker mild mat.
+Kjøttdeig og cottage cheese gir måltidet en tydelig proteinkilde. Tomat tilfører grønnsaker, mens søtpotet gir langsomme karbohydrater som passer etter en aktiv dag. Hot honey serveres separat fordi familien foretrekker mild mat.

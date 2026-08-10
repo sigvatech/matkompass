@@ -94,10 +94,11 @@ export default async function FredrikWeekPlanPage() {
       <section className="prep-guide" aria-labelledby="batchplan">
         <header>
           <p className="eyebrow">Minst mulig matlaging</p>
-          <h2 id="batchplan">To batchøkter, to dager med rester.</h2>
+          <h2 id="batchplan">Batchmat for ukedager og helg.</h2>
           <p>
             Mandag og torsdag pakkes på forhånd. Tirsdagens frokost og lunsj lages
-            dobbelt, slik at onsdag bare krever oppvarming og montering.
+            dobbelt, slik at onsdag bare krever oppvarming og montering. Lørdagens
+            eggerøre lages samtidig til søndag, og proteinvaflene pakkes til familien.
           </p>
         </header>
         <div className="prep-guide__steps">
@@ -126,6 +127,15 @@ export default async function FredrikWeekPlanPage() {
               <li>Bak søtpotet til torsdag–søndag.</li>
               <li>Pakk torsdagens cottage cheese-frokost og tunfisklunsj.</li>
               <li>Kok ekstra villris eller quinoa når middagen allerede bruker det, og frys porsjonene.</li>
+            </ul>
+          </section>
+          <section>
+            <p className="eyebrow">Lørdag</p>
+            <h3>Lag helgefrokost dobbelt</h3>
+            <ul>
+              <li>Lag dobbel eggerøre med karbonadedeig og sett av søndagsporsjonen.</li>
+              <li>Kjøl restene raskt ned og varm dem helt gjennom søndag.</li>
+              <li>Lag og pakk proteinvafler til hele familien.</li>
             </ul>
           </section>
         </div>

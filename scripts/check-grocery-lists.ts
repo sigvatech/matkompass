@@ -50,6 +50,7 @@ for (const list of lists) {
   const sirloin = list.lines.find((line) => line.id === "sirloin");
   const garlic = list.lines.find((line) => line.id === "garlic");
   const eggs = list.lines.find((line) => line.id === "egg");
+  const bananas = list.lines.find((line) => line.id === "banana");
   const dinnerSources = new Set(
     list.lines.flatMap((line) => line.sources.filter((source) => source.endsWith("middag"))),
   );
@@ -60,7 +61,7 @@ for (const list of lists) {
     `Uke ${list.week.weekNumber} mangler synlig omregning for villris`,
   );
   assert(
-    sirloin?.requiredLabel === "1,88 kg",
+    sirloin?.requiredLabel === "1,63 kg",
     `Uke ${list.week.weekNumber} dobbeltteller biff eller ytrefilet`,
   );
   assert(
@@ -68,8 +69,12 @@ for (const list of lists) {
     `Uke ${list.week.weekNumber} mangler hvitløk fra middagsoppskriftene`,
   );
   assert(
-    eggs?.purchaseLabel === "2 × 6 stk",
+    eggs?.purchaseLabel === "4 × 6 stk",
     `Uke ${list.week.weekNumber} runder ikke egg til praktiske pakker`,
+  );
+  assert(
+    bananas?.requiredLabel === "9,8 stk",
+    `Uke ${list.week.weekNumber} skalerer ikke helgevaflene til familien`,
   );
   assert(
     !list.lines.some((line) => line.id === "protein-powder"),
