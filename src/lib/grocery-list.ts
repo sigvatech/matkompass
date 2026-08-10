@@ -154,7 +154,7 @@ function getDayContributions(day: DatedPlanDay): GroceryContribution[] {
   const daytime = getFredrikDaytimePlan(day).flatMap((meal, index) =>
     getMealContributions(
       meal,
-      { adults: 1, children: 0 },
+      meal.sharedWithFamily ? familyPreset : { adults: 1, children: 0 },
       `${day.profile.name} · ${index === 0 ? "kl. 10–11" : "kl. 14"}`,
     ),
   );
@@ -168,8 +168,12 @@ function getMealContributions(
   family: FamilySize,
   source: string,
 ): GroceryContribution[] {
+  const planScale = getFamilyScale(1, family);
   const planned = meal.ingredients.map((ingredient) =>
-    getPlanContribution(ingredient, source),
+    getPlanContribution(
+      { ...ingredient, grams: ingredient.grams * planScale },
+      source,
+    ),
   );
 
   if (!meal.recipe) {

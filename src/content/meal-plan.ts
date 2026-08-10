@@ -15,6 +15,7 @@ export interface PlannedMeal {
   recipe?: RecipeReference;
   ingredients: IngredientAmount[];
   omittedRecipeGroceryItems?: GroceryItemId[];
+  sharedWithFamily?: boolean;
   details?: string[];
 }
 
@@ -108,7 +109,7 @@ export const nutritionTargets = {
 } as const;
 
 export const mealPlanNutritionMetadata = {
-  calculatedAt: "2026-07-27",
+  calculatedAt: "2026-08-10",
   notes: [
     "Fredriks grunnplan ligger rundt 1 950 kcal med minst 160 g protein hver dag.",
     "Oppskriftenes kjerneingredienser og fettmengder beholdes. Karbohydrat maksimeres deretter, med omtrent 200 g som et mykt mål.",
@@ -116,6 +117,7 @@ export const mealPlanNutritionMetadata = {
     "Kalkunkjøttdeig bruker Kalkun, kjøtt med skinn, rå som nærmeste tilgjengelige Matvaretabellen-verdi.",
     "Avokadoolje bruker extra virgin olivenolje som nærmeste tilgjengelige Matvaretabellen-verdi; begge er rene fettkilder.",
     "Kyllinglår med skinn bruker kyllinglår uten skinn som nærmeste tilgjengelige Matvaretabellen-verdi.",
+    "Lørdagens eggerøre lages dobbelt, og søndagsporsjonen kjøles raskt ned. Proteinvaflene lages til hele familien begge helgedager.",
   ],
 } as const;
 
@@ -184,7 +186,9 @@ const morningScramble = (
     },
     { foodId: "06.064", grams: 100, label: "spinat" },
     { foodId: "06.062", grams: 100, label: "sjampinjong" },
-    { foodId: "06.136", grams: sweetPotato, label: "søtpotet til servering" },
+    ...(sweetPotato > 0
+      ? [{ foodId: "06.136" as const, grams: sweetPotato, label: "søtpotet til servering" }]
+      : []),
     { foodId: "08.252", grams: 14, label: "ghee" },
   ],
   omittedRecipeGroceryItems: protein === "ytrefilet" ? ["ground-beef"] : undefined,
@@ -212,6 +216,23 @@ const hormoneHarmonyBowl = (
   omittedRecipeGroceryItems: ["salmon"],
   details,
 });
+
+const weekendProteinWaffles: PlannedMeal = {
+  recipe: recipeRef("frokost", "barnevennlige-proteinvafler"),
+  ingredients: [
+    { foodId: "02.001", grams: 100, label: "egg, ca. 2 stk." },
+    { foodId: "06.525", grams: 120, label: "banan" },
+    { foodId: "05.420", grams: 15, label: "mandelmel" },
+    { foodId: "08.249", grams: 3, label: "kokosolje til vaffeljernet" },
+    { foodId: "01.028", grams: 285, label: "cottage cheese til servering" },
+  ],
+  omittedRecipeGroceryItems: ["protein-powder"],
+  sharedWithFamily: true,
+  details: [
+    "Mengdene viser Fredriks porsjon. Handlelisten skalerer vaflene til to voksne og ett barn.",
+    "Avkjøl vaflene på rist før de pakkes, og hold cottage cheese kald frem til servering.",
+  ],
+};
 
 export const daytimeMeals: Record<DayName, [PlannedMeal, PlannedMeal]> = {
   Mandag: [
@@ -247,48 +268,16 @@ export const daytimeMeals: Record<DayName, [PlannedMeal, PlannedMeal]> = {
     ]),
   ],
   Lørdag: [
-    {
-      recipe: recipeRef("frokost", "frokostpanne"),
-      ingredients: [
-        { foodId: "02.001", grams: 50, label: "egg, ca. 1 stk." },
-        { foodId: "03.205", grams: 180, label: "kyllingfilet" },
-        { foodId: "06.136", grams: 300, label: "søtpotet" },
-        { foodId: "06.085", grams: 100, label: "squash" },
-        { foodId: "06.064", grams: 50, label: "spinat" },
-        { foodId: "08.252", grams: 7, label: "ghee" },
-      ],
-    },
-    {
-      recipe: recipeRef("lunsj", "betennelsesdempende-salatwraps"),
-      ingredients: [
-        { foodId: "03.004", grams: 272, label: "kalkunkjøtt" },
-        { foodId: "06.138", grams: 100, label: "romanosalat" },
-        { foodId: "06.036", grams: 50, label: "gulrot" },
-        { foodId: "06.010", grams: 50, label: "agurk" },
-        { foodId: "08.112", grams: 7, label: "extra virgin olivenolje" },
-        { foodId: "06.136", grams: 336, label: "søtpotet til servering" },
-      ],
-    },
+    morningScramble("karbonadedeig", 300, 0, [
+      "Lag dobbel porsjon lørdag. Kjøl søndagsporsjonen raskt ned og oppbevar den kaldt.",
+    ]),
+    weekendProteinWaffles,
   ],
   Søndag: [
-    {
-      recipe: recipeRef("frokost", "barnevennlige-proteinvafler"),
-      ingredients: [
-        { foodId: "02.001", grams: 100, label: "egg, ca. 2 stk." },
-        { foodId: "06.525", grams: 120, label: "banan" },
-        { foodId: "05.420", grams: 15, label: "mandelmel" },
-        { foodId: "08.249", grams: 3, label: "kokosolje til vaffeljernet" },
-        { foodId: "01.028", grams: 285, label: "cottage cheese til servering" },
-      ],
-      details: [
-        "Lag omtrent 2,5 ganger oppskriften til hele familien; mengdene under er Fredriks porsjon.",
-        "Planversjonen bruker cottage cheese og ikke valgfritt proteinpulver.",
-      ],
-      omittedRecipeGroceryItems: ["protein-powder"],
-    },
-    morningScramble("ytrefilet", 245, 196, [
-      "Ytrefileten stekes raskt i strimler før egg og grønnsaker tilsettes.",
+    morningScramble("karbonadedeig", 300, 0, [
+      "Varm opp porsjonen som ble laget lørdag, og sørg for at den er gjennomvarm.",
     ]),
+    weekendProteinWaffles,
   ],
 };
 
@@ -397,7 +386,6 @@ export const dinnerDefinitions: Record<string, DinnerDefinition> = {
       { foodId: "01.028", grams: 235 },
       { foodId: "06.136", grams: 350 },
       { foodId: "06.752", grams: 200 },
-      { foodId: "06.138", grams: 150 },
       { foodId: "06.524", grams: 176 },
       { foodId: "08.252", grams: 39, label: "ghee og smør" },
     ],
