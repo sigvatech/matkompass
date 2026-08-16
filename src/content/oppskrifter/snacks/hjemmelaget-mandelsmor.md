@@ -22,7 +22,7 @@ ingredients:
         optional: true
 tags: ["Nøttesmør", "Pålegg"]
 adapted: true
-adaptationNote: "Kokossukkeret er gjort valgfritt for å følge Matkompass-prinsippet om å bruke konsentrerte karbohydrater etter behov og mål."
+adaptationNote: "Kokossukkeret er gjort valgfritt fordi Matkompass bruker søtning bare i enkelte oppskrifter, ikke som fri hverdagsmat."
 ---
 
 ## Fremgangsmåte
