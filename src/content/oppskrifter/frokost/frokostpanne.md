@@ -29,7 +29,7 @@ ingredients:
       - text: "Havsalt, gurkemeie og grovkvernet sort pepper etter smak"
         groceryItems: ["salt-pepper", "turmeric"]
 tags:
-  - "Støtter avgiftning"
+  - "Detoxstøtte"
   - "Uten korn"
   - "Blodsukkervennlig"
 adapted: false

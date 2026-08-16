@@ -63,9 +63,8 @@ export interface FredrikPlanDay extends DatedPlanDay {
 }
 
 const familyShares = {
-  Fredrik: 0.425,
-  Kamilla: 0.425,
-  Josefine: 0.15,
+  Fredrik: 0.5,
+  Kamilla: 0.5,
 } as const;
 
 const foodsById = new Map(foods.map((food) => [food.id, food]));

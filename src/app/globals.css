@@ -1130,7 +1130,15 @@ button:focus-visible {
 
 .dinner-plan-day {
   position: relative;
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  min-height: 7.2rem;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
 }
 
 .dinner-plan-day--today {
@@ -1151,26 +1159,11 @@ button:focus-visible {
   content: "";
 }
 
-.dinner-plan-day--today summary {
+.dinner-plan-day--today {
   scroll-margin-block: 2rem;
 }
 
-.dinner-plan-day summary {
-  display: grid;
-  grid-template-columns: 3.25rem minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 1rem;
-  min-height: 7.2rem;
-  padding: 1rem 0;
-  cursor: pointer;
-  list-style: none;
-}
-
-.dinner-plan-day summary::-webkit-details-marker {
-  display: none;
-}
-
-.dinner-plan-day summary:focus-visible {
+.dinner-plan-day:focus-visible {
   border-radius: 0.5rem;
   outline: 3px solid var(--ink);
   outline-offset: 4px;
@@ -1190,20 +1183,6 @@ button:focus-visible {
   text-transform: uppercase;
 }
 
-.dinner-plan-day__today-label {
-  width: fit-content;
-  margin-top: 0.3rem;
-  padding: 0.12rem 0.4rem;
-  border-radius: 100vmax;
-  background: var(--moss);
-  color: var(--paper-light);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1.5;
-  text-transform: uppercase;
-}
-
 .dinner-plan-day__title {
   font-family: Georgia, serif;
   font-size: clamp(1.35rem, 3.5vw, 2.15rem);
@@ -1211,49 +1190,10 @@ button:focus-visible {
   line-height: 1.05;
 }
 
-.dinner-plan-day__badges {
-  display: none;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.35rem;
-}
-
-.dinner-plan-day__badges span {
-  padding: 0.3rem 0.6rem;
-  border: 1px solid var(--line);
-  border-radius: 100vmax;
-  color: var(--ink-soft);
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-
-.dinner-plan-day__toggle {
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid var(--ink);
-  border-radius: 50%;
-  font-size: 1.2rem;
-  transition: transform 160ms ease;
-}
-
-.dinner-plan-day[open] .dinner-plan-day__toggle {
-  transform: rotate(45deg);
-}
-
-.dinner-plan-day[open] summary {
-  border-bottom: 1px solid var(--line);
-}
-
-.dinner-plan-day__body {
-  display: grid;
-  gap: 2rem;
-  padding: clamp(1.5rem, 5vw, 3rem) 0 clamp(2.5rem, 6vw, 4rem);
-}
-
-.dinner-plan-day__column {
-  min-width: 0;
+.dinner-plan-day:hover .dinner-plan-day__title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
 
 .amount-list {
@@ -1282,25 +1222,10 @@ button:focus-visible {
   white-space: nowrap;
 }
 
-.seasoning-line,
 .meal-card__detail {
   margin: 1rem 0 0;
   color: var(--ink-soft);
   font-size: 0.86rem;
-}
-
-.plan-steps {
-  margin: 1rem 0 0;
-  padding-left: 1.2rem;
-}
-
-.plan-steps li {
-  padding: 0.4rem 0 0.4rem 0.35rem;
-}
-
-.dinner-plan-day__portions {
-  display: grid;
-  gap: 0.75rem;
 }
 
 .nutrition-summary {
@@ -1685,25 +1610,8 @@ button:focus-visible {
     align-items: start;
   }
 
-  .dinner-plan-day summary {
-    grid-template-columns: 4rem minmax(16rem, 1fr) minmax(12rem, 0.75fr) 2rem;
-  }
-
-  .dinner-plan-day__badges {
-    display: flex;
-  }
-
-  .dinner-plan-day__body {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .dinner-plan-day__portions,
-  .dinner-plan-day__body > .primary-link {
-    grid-column: 1 / -1;
-  }
-
-  .dinner-plan-day__portions {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .dinner-plan-day {
+    grid-template-columns: 4rem minmax(16rem, 1fr);
   }
 
   .fredrik-day__header {
@@ -1802,8 +1710,7 @@ button:focus-visible {
   }
 
   .home-card,
-  .recipe-card,
-  .dinner-plan-day__toggle {
+  .recipe-card {
     transition: none;
   }
 }

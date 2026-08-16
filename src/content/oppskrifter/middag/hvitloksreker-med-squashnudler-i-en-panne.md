@@ -43,4 +43,4 @@ Krydre og server umiddelbart.
 
 ## Hvorfor den fungerer
 
-Villfangede reker har et høyt innhold av selen og jod, to mineraler som direkte støtter skjoldbruskkjertelens funksjon, stoffskiftet og kroppens avgiftningsenzymer. Squashnudler erstatter pasta som øker blodsukkeret, med et lavglykemisk, kaliumrikt alternativ som støtter tarmbevegelse og et sunt blodtrykk. Hvitløk og olivenolje tilfører betennelsesdempende og kardiovaskulære fordeler i hver bit, og gjør måltidet lett for fordøyelsen og tungt på restitusjon.
+Villfangede reker har et høyt innhold av selen og jod, to mineraler som direkte støtter skjoldbruskkjertelens funksjon, stoffskiftet og kroppens detox-enzymer. Squashnudler erstatter pasta som øker blodsukkeret, med et lavglykemisk, kaliumrikt alternativ som støtter tarmbevegelse og et sunt blodtrykk. Hvitløk og olivenolje tilfører betennelsesdempende og kardiovaskulære fordeler i hver bit, og gjør måltidet lett for fordøyelsen og tungt på restitusjon.

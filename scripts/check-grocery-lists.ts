@@ -61,7 +61,7 @@ for (const list of lists) {
     `Uke ${list.week.weekNumber} mangler synlig omregning for villris`,
   );
   assert(
-    sirloin?.requiredLabel === "1,63 kg",
+    sirloin?.requiredLabel === "1,49 kg",
     `Uke ${list.week.weekNumber} dobbeltteller biff eller ytrefilet`,
   );
   assert(
@@ -69,11 +69,11 @@ for (const list of lists) {
     `Uke ${list.week.weekNumber} mangler hvitløk fra middagsoppskriftene`,
   );
   assert(
-    eggs?.purchaseLabel === "4 × 6 stk",
+    eggs?.purchaseLabel === (list.week.type === "A" ? "3 × 6 stk" : "4 × 6 stk"),
     `Uke ${list.week.weekNumber} runder ikke egg til praktiske pakker`,
   );
   assert(
-    bananas?.requiredLabel === "9,8 stk",
+    bananas?.requiredLabel === "9,1 stk",
     `Uke ${list.week.weekNumber} skalerer ikke helgevaflene til familien`,
   );
   assert(

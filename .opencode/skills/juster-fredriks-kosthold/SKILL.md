@@ -116,7 +116,7 @@ Bevar disse invariantene med mindre Fredrik uttrykkelig endrer dem:
 - hele råvarer og protein fordelt gjennom dagen
 - tre beregnede måltider; øktdrivstoff vises separat når det faktisk er valgfritt
 - samme frokost- og lunsjmønster i uke A og B
-- fast middagsfordeling på 42,5 % / 42,5 % / 15 % uten personlige middagstillegg
+- fast middagsfordeling på 50 % / 50 % mellom Fredrik og Kamilla uten personlige middagstillegg
 - oppskriftenes kjerneingredienser og fettmengder
 - ingen separat eggehvite som proteintillegg
 - kontordagenes praktiske krav

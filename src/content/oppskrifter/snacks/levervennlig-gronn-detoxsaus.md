@@ -1,5 +1,5 @@
 ---
-title: Levervennlig grønn avgiftningssaus
+title: Levervennlig grønn detoxsaus
 category: snacks
 source: https://members.theultimatehuman.com/posts/recipes-liver-loving-green-detox-sauce
 yield: ""
@@ -25,7 +25,7 @@ ingredients:
         optional: true
 tags:
   - Støtter gallen
-  - Avgiftning av østrogen
+  - Detox av østrogen
   - Binder tungmetaller
 adapted: false
 adaptationNote: ""
@@ -41,4 +41,4 @@ Server med grillet biff fra gressfôret storfe, villfanget laks, kylling fra bei
 
 ## Hvorfor den fungerer
 
-Koriander og persille er to av de best dokumenterte naturlige binderne for muggsoppgifter og tungmetaller i tarmen. Sitron og eplecidereddik stimulerer produksjonen av fordøyelsesenzymer og aktiverer fase I i leverens avgiftningsveier. Olivenolje fører fettløselige giftstoffer ut av kroppen gjennom gallen, noe som gjør denne sausen til et funksjonelt avgiftningsverktøy, ikke bare et tilbehør. Hvis du er i en hvilken som helst avgiftningsfase, hører denne hjemme i kjøleskapet ditt.
+Koriander og persille er to av de best dokumenterte naturlige binderne for muggsoppgifter og tungmetaller i tarmen. Sitron og eplecidereddik stimulerer produksjonen av fordøyelsesenzymer og aktiverer fase I i leverens detoxprosesser. Olivenolje fører fettløselige giftstoffer ut av kroppen gjennom gallen, noe som gjør denne sausen til et funksjonelt detoxverktøy, ikke bare et tilbehør. Hvis du er i en hvilken som helst detoxfase, hører denne hjemme i kjøleskapet ditt.

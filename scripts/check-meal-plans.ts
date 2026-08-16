@@ -40,7 +40,7 @@ const steakRecipes = new Set([
   "biffbiter",
   "stopjernsbiff-med-avgiftende-bladgront",
 ]);
-const familyMembers = ["Fredrik", "Kamilla", "Josefine"] as const;
+const familyMembers = ["Fredrik", "Kamilla"] as const;
 let failed = false;
 
 if (familyShares.Fredrik !== familyShares.Kamilla) {
@@ -49,6 +49,23 @@ if (familyShares.Fredrik !== familyShares.Kamilla) {
 
 if (Object.values(familyShares).reduce((sum, share) => sum + share, 0) !== 1) {
   throw new Error("Middagsandelene skal til sammen være 100 %");
+}
+
+if (Object.keys(familyShares).length !== 2) {
+  throw new Error("Middagsplanen skal bare fordeles mellom de to voksne");
+}
+
+const steakTips = weeks
+  .flatMap((week) => week.days)
+  .find((day) => day.dinner.recipe.slug === "biffbiter");
+const fredriksSteak = steakTips
+  ? getDinnerIngredients("Fredrik", steakTips.dinner).find(
+      (ingredient) => ingredient.foodId === "03.066",
+    )
+  : undefined;
+
+if (!fredriksSteak || Math.abs(fredriksSteak.grams - 224.825) > 0.0001) {
+  throw new Error("To-voksenfordelingen skal bevare Fredriks eksisterende biffmengde");
 }
 
 for (const [day, meals] of Object.entries(daytimeMeals)) {

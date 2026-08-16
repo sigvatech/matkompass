@@ -48,4 +48,4 @@ Oppbevaring: Oppbevar i en lufttett beholder i kjøleskapet i 3–4 dager, eller
 
 ## Hvorfor den fungerer
 
-De fleste butikkjøpte tortillaer inneholder folsyre, en syntetisk form for folat som omtrent 40 % av mennesker ikke kan omdanne ordentlig, noe som fører til en opphopning som kan forstyrre metylering og avgiftning. Økologisk masa harina laget av tradisjonelt nixtamalisert mais gir naturlige B-vitaminer, øker mineralenes biotilgjengelighet og støtter tarmhelsen uten noen av tilsetningsstoffene som finnes i kommersielle varianter.
+De fleste butikkjøpte tortillaer inneholder folsyre, en syntetisk form for folat som omtrent 40 % av mennesker ikke kan omdanne ordentlig, noe som fører til en opphopning som kan forstyrre metylering og detox. Økologisk masa harina laget av tradisjonelt nixtamalisert mais gir naturlige B-vitaminer, øker mineralenes biotilgjengelighet og støtter tarmhelsen uten noen av tilsetningsstoffene som finnes i kommersielle varianter.

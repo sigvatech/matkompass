@@ -1,5 +1,5 @@
 ---
-title: "Hjernestyrkende chiapudding"
+title: "Brain-Boosting chiapudding"
 category: frokost
 source: "https://members.theultimatehuman.com/posts/recipes-brain-boosting-chia-pudding"
 yield: "1 porsjon"

@@ -49,4 +49,4 @@ adaptationNote: "Cayennepepper er gjort valgfri og serveres separat for å holde
 
 ## Hvorfor den fungerer
 
-Lymfesystemet er kroppens viktigste dreneringsvei og har ansvar for å fjerne avfall, patogener og betennelsesrester. Fennikel er en veldokumentert lymfestimulator som fremmer væskebevegelse og reduserer oppblåsthet. Kål gir forløpere til glutation som støtter leverens fase II-avgiftning, mens kraft på bein gir tarmslimhinnen kollagen og mineraler. Hvitløk bidrar også med immunforsvar og allisindrevet betennelsesdempende støtte i hele kroppen.
+Lymfesystemet er kroppens viktigste dreneringsvei og har ansvar for å fjerne avfall, patogener og betennelsesrester. Fennikel er en veldokumentert lymfestimulator som fremmer væskebevegelse og reduserer oppblåsthet. Kål gir forløpere til glutation som støtter leverens fase II-detox, mens kraft på bein gir tarmslimhinnen kollagen og mineraler. Hvitløk bidrar også med immunforsvar og allisindrevet betennelsesdempende støtte i hele kroppen.

@@ -30,7 +30,7 @@ ingredients:
         optional: true
 tags:
   - "Stimulerer gallestrømmen"
-  - "Fase I- og II-avgiftning i leveren"
+  - "Fase I- og II-detox i leveren"
   - "Støtter daglig avføring"
 adapted: false
 adaptationNote: ""
@@ -44,4 +44,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Leveren er en metabolsk motor som koordinerer avgiftning, utskillelse av hormoner og energiproduksjon. Løvetanngrønt stimulerer gallestrømmen for å støtte fettfordøyelsen og utskillelsen av giftstoffer. Sitron aktiverer avgiftningsenzymer i fase I og II, og kollagen tilfører aminosyrene som trengs for å reparere levervev. Chia og linfrø tilfører fiber som binder giftstoffer og fører dem ut gjennom fordøyelsen.
+Leveren er en metabolsk motor som koordinerer detox, utskillelse av hormoner og energiproduksjon. Løvetanngrønt stimulerer gallestrømmen for å støtte fettfordøyelsen og utskillelsen av giftstoffer. Sitron aktiverer detox-enzymer i fase I og II, og kollagen tilfører aminosyrene som trengs for å reparere levervev. Chia og linfrø tilfører fiber som binder giftstoffer og fører dem ut gjennom fordøyelsen.

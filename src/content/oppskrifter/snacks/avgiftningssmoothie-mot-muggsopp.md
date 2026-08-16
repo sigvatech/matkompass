@@ -1,5 +1,5 @@
 ---
-title: Avgiftningssmoothie mot muggsopp
+title: Detox-smoothie mot muggsopp
 category: snacks
 source: https://members.theultimatehuman.com/posts/recipes-mold-detox-smoothie
 yield: ""
@@ -46,4 +46,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Koriander er en av de best dokumenterte naturlige binderne for muggsoppgifter og tungmetaller, og bryter ned biofilmer slik at kroppen kan skille dem ut. Sitron aktiverer leverens avgiftningsenzymer og støtter produksjonen av glutation, kroppens viktigste antioksidant. MCT-olje gir hjernen energi og stimulerer gallestrømmen, som er det viktigste transportmiddelet for å føre giftstoffer ut av kroppen. Chiafrø tilfører løselig fiber som binder alt og skyller det gjennom fordøyelsen.
+Koriander er en av de best dokumenterte naturlige binderne for muggsoppgifter og tungmetaller, og bryter ned biofilmer slik at kroppen kan skille dem ut. Sitron aktiverer leverens detox-enzymer og støtter produksjonen av glutation, kroppens viktigste antioksidant. MCT-olje gir hjernen energi og stimulerer gallestrømmen, som er det viktigste transportmiddelet for å føre giftstoffer ut av kroppen. Chiafrø tilfører løselig fiber som binder alt og skyller det gjennom fordøyelsen.

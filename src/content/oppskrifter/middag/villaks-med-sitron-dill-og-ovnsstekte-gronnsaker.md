@@ -32,7 +32,7 @@ ingredients:
         groceryItems: ["broccoli"]
       - text: "Havsalt og svart pepper etter smak"
         groceryItems: ["salt-pepper"]
-tags: ["Omega-3-økning", "Avgiftning av østrogen", "Støtte for hud og hjerne"]
+tags: ["Omega-3-økning", "Detox av østrogen", "Støtte for hud og hjerne"]
 adapted: false
 adaptationNote: ""
 ---
@@ -49,4 +49,4 @@ Stek i 15–18 minutter til laksen er gjennomstekt og grønnsakene er møre.
 
 ## Hvorfor den fungerer
 
-Villaks er et av de mest omega-3-rike proteinene som finnes, noe som er avgjørende for å opprettholde integriteten til mitokondriemembranene, støtte produksjonen av nevrotransmittere og regulere humøret. Brokkoli gir indol-3-karbinol og DIM, forbindelser som aktivt støtter fase II-avgiftning av østrogen gjennom leveren. Sitronskall og olivenolje forbedrer opptaket av fettløselige næringsstoffer, og fullfører syklusen for avgiftning og hormonstøtte uten en eneste blodsukkerstigning.
+Villaks er et av de mest omega-3-rike proteinene som finnes, noe som er avgjørende for å opprettholde integriteten til mitokondriemembranene, støtte produksjonen av nevrotransmittere og regulere humøret. Brokkoli gir indol-3-karbinol og DIM, forbindelser som aktivt støtter fase II-detox av østrogen gjennom leveren. Sitronskall og olivenolje forbedrer opptaket av fettløselige næringsstoffer, og fullfører detoxsyklusen og hormonstøtten uten en eneste blodsukkerstigning.

@@ -34,4 +34,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Eggeplommer er en av de rikeste kostholdskildene til kolin, et næringsstoff som er avgjørende for produksjonen av nevrotransmittere, metylering og hormonsignalering. Olivenolje øker biotilgjengeligheten til fettløselige næringsstoffer i plommen, mens gurkemeie gir kurkumin for kontroll av inflammasjon og støtte til leverens avgiftning. Sammen blir dette et av de mest næringstette mellommåltidene på to biter du kan lage.
+Eggeplommer er en av de rikeste kostholdskildene til kolin, et næringsstoff som er avgjørende for produksjonen av nevrotransmittere, metylering og hormonsignalering. Olivenolje øker biotilgjengeligheten til fettløselige næringsstoffer i plommen, mens gurkemeie gir kurkumin for kontroll av inflammasjon og støtte til leverens detoxprosesser. Sammen blir dette et av de mest næringstette mellommåltidene på to biter du kan lage.

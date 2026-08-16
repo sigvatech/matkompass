@@ -1,5 +1,5 @@
 ---
-title: Grillet kylling-«avgiftningstallerken»
+title: Grillet kylling-detox-tallerken
 category: lunsj
 source: https://members.theultimatehuman.com/posts/recipes-grilled-chicken-detox-plate
 yield: "2 porsjoner"
@@ -20,7 +20,7 @@ ingredients:
       - text: "En skvett olivenolje"
       - text: "Havsalt og sort pepper etter smak"
 tags:
-  - Avgiftning av østrogen
+  - Detox av østrogen
   - Betennelsesdempende
   - Støtter blodsukkeret
 adapted: false
@@ -34,4 +34,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Brokkoli inneholder indol-3-karbinol og DIM, forbindelser som støtter leverens fase II-avgiftning og hjelper kroppen med å fjerne overflødig østrogen. Kyllingbryst gir rent, biotilgjengelig protein som støtter muskelreparasjon uten hormonbelastningen fra konvensjonelt kjøtt. Avokado og olivenolje gir det sunne fettet som trengs for å aktivere gallestrømmen og frakte fettløselige giftstoffer ut av kroppen.
+Brokkoli inneholder indol-3-karbinol og DIM, forbindelser som støtter leverens fase II-detox og hjelper kroppen med å fjerne overflødig østrogen. Kyllingbryst gir rent, biotilgjengelig protein som støtter muskelreparasjon uten hormonbelastningen fra konvensjonelt kjøtt. Avokado og olivenolje gir det sunne fettet som trengs for å aktivere gallestrømmen og frakte fettløselige giftstoffer ut av kroppen.
