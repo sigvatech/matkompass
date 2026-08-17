@@ -35,6 +35,94 @@
   color: var(--paper-light);
 }
 
+.rangePanel {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border-radius: 1.5rem;
+  background: var(--paper-light);
+  box-shadow:
+    0 1px 1px rgb(29 42 36 / 6%),
+    0 1rem 3rem rgb(29 42 36 / 8%);
+}
+
+.rangeCopy {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.rangeCopy h2,
+.rangeCopy p {
+  margin: 0;
+}
+
+.rangeCopy h2 {
+  text-wrap: balance;
+}
+
+.rangeCopy > p:last-child {
+  max-width: 52ch;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.rangeForm {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.rangeForm label {
+  display: grid;
+  gap: 0.3rem;
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.rangeForm input,
+.rangeForm button {
+  min-height: 2.75rem;
+  border-radius: 0.75rem;
+  font: inherit;
+}
+
+.rangeForm input {
+  min-width: 0;
+  padding: 0 0.75rem;
+  border: 1px solid var(--line);
+  background: rgb(255 255 255 / 72%);
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.rangeForm button {
+  align-self: end;
+  padding: 0.65rem 1rem;
+  border: 0;
+  background: var(--moss-dark);
+  color: var(--paper-light);
+  cursor: pointer;
+  font-weight: 850;
+  transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.rangeForm button:hover {
+  background: var(--moss);
+}
+
+.rangeForm button:active {
+  transform: scale(0.96);
+}
+
+.rangeError {
+  margin: 0;
+  color: #8c2f23;
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
 .explainer {
   display: grid;
   gap: 1rem;
@@ -274,6 +362,20 @@
 }
 
 @media (min-width: 42rem) {
+  .rangePanel {
+    grid-template-columns: minmax(0, 0.8fr) minmax(22rem, 1.2fr);
+    align-items: end;
+  }
+
+  .rangeForm {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+    align-items: end;
+  }
+
+  .rangeError {
+    grid-column: 2;
+  }
+
   .explainer {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: center;

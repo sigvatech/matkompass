@@ -196,6 +196,24 @@ export function getCurrentPlanWeeks(now = new Date()): [DatedPlanWeek, DatedPlan
   return [createPlanWeek(currentMonday), createPlanWeek(addDays(currentMonday, 7))];
 }
 
+export function getPlanDaysInRange(start: Date, end: Date): DatedPlanDay[] {
+  if (start > end) {
+    throw new Error("Startdato må være før eller lik sluttdato");
+  }
+
+  const days: DatedPlanDay[] = [];
+  let monday = startOfWeek(start);
+
+  while (monday <= end) {
+    days.push(
+      ...createPlanWeek(monday).days.filter((day) => day.date >= start && day.date <= end),
+    );
+    monday = addDays(monday, 7);
+  }
+
+  return days;
+}
+
 export function getTodayInOslo(now = new Date()): Date {
   return getOsloDate(now);
 }

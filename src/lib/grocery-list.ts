@@ -16,6 +16,7 @@ import {
   formatDateRange,
   getCurrentPlanWeeks,
   getFredrikDaytimePlan,
+  getPlanDaysInRange,
   type DatedPlanDay,
   type DatedPlanWeek,
 } from "./meal-plan";
@@ -53,14 +54,22 @@ export interface GroceryListLine {
   defaultOfferId: string;
 }
 
-export interface WeeklyGroceryList {
+export interface GroceryList {
+  period: {
+    startDate: string;
+    endDate: string;
+    dateRange: string;
+  };
+  lines: GroceryListLine[];
+}
+
+export interface WeeklyGroceryList extends GroceryList {
   week: {
     type: "A" | "B";
     weekNumber: number;
     startDate: string;
     dateRange: string;
   };
-  lines: GroceryListLine[];
 }
 
 interface GroceryContribution {
@@ -130,6 +139,11 @@ export function getWeeklyGroceryList(
   const lines = aggregateContributions(contributions);
 
   return {
+    period: {
+      startDate: week.start.toISOString().slice(0, 10),
+      endDate: week.end.toISOString().slice(0, 10),
+      dateRange: formatDateRange(week.start, week.end),
+    },
     week: {
       type: week.type,
       weekNumber: week.weekNumber,
@@ -137,6 +151,19 @@ export function getWeeklyGroceryList(
       dateRange: formatDateRange(week.start, week.end),
     },
     lines,
+  };
+}
+
+export function getGroceryListForDateRange(start: Date, end: Date): GroceryList {
+  const days = getPlanDaysInRange(start, end);
+
+  return {
+    period: {
+      startDate: start.toISOString().slice(0, 10),
+      endDate: end.toISOString().slice(0, 10),
+      dateRange: formatDateRange(start, end),
+    },
+    lines: aggregateContributions(days.flatMap((day) => getDayContributions(day))),
   };
 }
 

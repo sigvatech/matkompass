@@ -1,5 +1,6 @@
 import { retailers } from "../src/content/retailers";
 import {
+  getGroceryListForDateRange,
   getWeeklyGroceryList,
   validateGroceryConfiguration,
 } from "../src/lib/grocery-list";
@@ -15,6 +16,26 @@ const lists = [
 
 assert(lists[0].week.type === "A", "Referanseuken skal være plan A");
 assert(lists[1].week.type === "B", "Neste referanseuke skal være plan B");
+
+const sameWeekRange = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-07-26T00:00:00Z"),
+);
+assert(
+  JSON.stringify(sameWeekRange.lines) === JSON.stringify(lists[0].lines),
+  "En datoperiode på sju dager skal gi samme handleliste som ukevisningen",
+);
+
+const crossWeekRange = getGroceryListForDateRange(
+  new Date("2026-07-26T00:00:00Z"),
+  new Date("2026-07-27T00:00:00Z"),
+);
+const crossWeekDinners = new Set(
+  crossWeekRange.lines.flatMap((line) =>
+    line.sources.filter((source) => source.endsWith("middag")),
+  ),
+);
+assert(crossWeekDinners.size === 2, "En datoperiode skal kunne krysse ukegrensen");
 
 for (const list of lists) {
   assert(list.lines.length > 30, `Uke ${list.week.weekNumber} har for få dagligvarer`);
