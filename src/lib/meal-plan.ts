@@ -6,6 +6,7 @@ import {
   mealPlanNutritionMetadata,
   nutritionTargets,
   type DayProfile,
+  type DaytimeMeal,
   type DinnerDefinition,
   type IngredientAmount,
   type PlannedMeal,
@@ -54,11 +55,13 @@ export interface FredrikMeal {
   details?: string[];
   time: string;
   nutrition: Nutrition;
+  nutritionTracked: boolean;
 }
 
 export interface FredrikPlanDay extends DatedPlanDay {
   meals: FredrikMeal[];
   nutrition: Nutrition;
+  nutritionComplete: boolean;
   target: (typeof nutritionTargets)[keyof typeof nutritionTargets];
 }
 
@@ -154,10 +157,10 @@ export function getDinnerIngredients(
 
 export function getFredrikPlanDay(day: DatedPlanDay): FredrikPlanDay {
   const mealsForDay = getFredrikDaytimePlan(day);
-  const meals: FredrikMeal[] = [
-    createFredrikMeal("Kl. 10–11", mealsForDay[0]),
-    createFredrikMeal("Kl. 14", mealsForDay[1]),
-  ];
+  const daytimeMealTimes = ["Kl. 10–11", "Kl. 14"] as const;
+  const meals: FredrikMeal[] = mealsForDay.flatMap((meal, index) =>
+    meal ? [createFredrikMeal(daytimeMealTimes[index], meal)] : [],
+  );
 
   const dinnerIngredients = getFredrikDinnerIngredients(day.dinner);
   meals.push({
@@ -167,19 +170,23 @@ export function getFredrikPlanDay(day: DatedPlanDay): FredrikPlanDay {
     ingredients: dinnerIngredients,
     details: undefined,
     nutrition: calculateNutrition(dinnerIngredients),
+    nutritionTracked: true,
   });
 
   return {
     ...day,
     meals,
     nutrition: sumNutrition(meals.map((meal) => meal.nutrition)),
+    nutritionComplete:
+      meals.length === daytimeMealTimes.length + 1 &&
+      meals.every((meal) => meal.nutritionTracked),
     target: nutritionTargets[day.profile.kind],
   };
 }
 
 export function getFredrikDaytimePlan(
   day: DatedPlanDay,
-): readonly [PlannedMeal, PlannedMeal] {
+): readonly [DaytimeMeal, DaytimeMeal] {
   return daytimeMeals[day.profile.name];
 }
 
@@ -236,6 +243,7 @@ function createFredrikMeal(time: string, meal: PlannedMeal): FredrikMeal {
     details: meal.details,
     time,
     nutrition: calculateNutrition(meal.ingredients),
+    nutritionTracked: meal.nutritionTracked !== false,
   };
 }
 

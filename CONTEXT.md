@@ -76,13 +76,13 @@ Fredriks gjeldende grunnmål er omtrent 1 950 kcal og minst 160 g protein hver d
 
 ## Fredriks måltidsrytme
 
-Alle dager har tre beregnede måltider: første måltid mellom kl. 10 og 11, andre måltid kl. 14 og familiemiddag kl. 17. Valgfritt drivstoff på aktive dager vises som veiledning, ikke som et beregnet fjerde måltid.
+Tirsdag, onsdag, fredag, lørdag og søndag har tre beregnede måltider: første måltid mellom kl. 10 og 11, andre måltid kl. 14 og familiemiddag kl. 17. Mandag og torsdag har tom frokost og lunsj, slik at bare familiemiddagen kl. 17 er planlagt. Valgfritt drivstoff på aktive dager vises som veiledning, ikke som et beregnet ekstra måltid.
 
 Frokost og lunsj følger samme ukedagsmønster i uke A og uke B. Porsjonene kan suppleres med fisk, kylling eller storfe for å treffe proteinmålet. Frokostoppskrifter med aminosyre- eller kollagenpulver er tillatt, selv om pulver ikke skal være standardgrunnlaget for nye måltider.
 
 Eggehvite brukes ikke som et separat proteintillegg i planen. Eggerettene beholder hele egg og får nødvendig tilleggsprotein fra karbonadedeig, ytrefilet eller kylling. Proteinvaflene serveres med ekstra cottage cheese i stedet for eggehvite.
 
-Mandag og torsdag er kontordager med de samme enkle rettene: vanlig cottage cheese med banan, valnøtter og litt honning til frokost, og tunfisk med agurk og batchbakt søtpotet til lunsj. Kontormåltidene inneholder verken eggehvite eller avokado. Tirsdag og onsdag bruker den samme eggerørebasen med ytrefilet og den samme hormonbalansebollen med kylling; tirsdagens porsjoner lages dobbelt og onsdagens varmes opp. Fredag bruker eggerøren med ytrefilet og hormonbalansebollen med norsk røkt laks. Norsk røkt laks er et uttrykkelig godkjent unntak når ingredienslisten kun inneholder laks og salt. Lørdag og søndag bruker den samme eggerøren med karbonadedeig til frokost og barnevennlige proteinvafler med cottage cheese til lunsj. Lørdagens eggerøre lages dobbelt, og søndagsporsjonen varmes opp. Vaflene lages til hele familien og kan pakkes med på tur. Frokost og lunsj er de samme i uke A og B; bare middagsrotasjonen varierer.
+Mandag og torsdag er kontordager uten planlagt frokost eller lunsj. Tirsdag og onsdag bruker den samme eggerørebasen med ytrefilet og den samme hormonbalansebollen med kylling; tirsdagens porsjoner lages dobbelt og onsdagens varmes opp. Fredag bruker eggerøren med ytrefilet og hormonbalansebollen med kylling. Lørdag og søndag bruker den samme eggerøren med karbonadedeig til frokost og barnevennlige proteinvafler med cottage cheese til lunsj. Lørdagens eggerøre lages dobbelt, og søndagsporsjonen varmes opp. Vaflene lages til hele familien og kan pakkes med på tur. Frokost og lunsj er de samme i uke A og B; bare middagsrotasjonen varierer.
 
 Søtpotet bakes i større porsjoner søndag og onsdag. Når familiemiddagen allerede krever villris eller quinoa, kan det kokes ekstra og fryses i porsjoner, men søtpotet er standard karbohydrat til Fredriks frokoster og lunsjer. Mat som skal spises senere i uken kjøles raskt ned og fryses fremfor å stå i kjøleskapet hele uken.
 

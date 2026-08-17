@@ -73,8 +73,12 @@ for (const list of lists) {
     `Uke ${list.week.weekNumber} runder ikke egg til praktiske pakker`,
   );
   assert(
-    bananas?.requiredLabel === "9,1 stk",
+    bananas?.requiredLabel === "4 stk",
     `Uke ${list.week.weekNumber} skalerer ikke helgevaflene til familien`,
+  );
+  assert(
+    !list.lines.some((line) => line.id === "tuna"),
+    `Uke ${list.week.weekNumber} kjøper tunfisk til tomme kontormåltider`,
   );
   assert(
     !list.lines.some((line) => line.id === "protein-powder"),

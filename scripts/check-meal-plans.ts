@@ -69,7 +69,7 @@ if (!fredriksSteak || Math.abs(fredriksSteak.grams - 224.825) > 0.0001) {
 }
 
 for (const [day, meals] of Object.entries(daytimeMeals)) {
-  if (meals.some((meal) => meal.ingredients.some((ingredient) => ingredient.foodId === "02.002"))) {
+  if (meals.some((meal) => meal?.ingredients.some((ingredient) => ingredient.foodId === "02.002"))) {
     throw new Error(`${day} bruker eggehvite som separat proteintillegg`);
   }
 }
@@ -112,6 +112,27 @@ for (const week of weeks) {
 
     const plan = getFredrikPlanDay(day);
     const actual = roundNutrition(plan.nutrition);
+
+    if (!plan.nutritionComplete) {
+      const untrackedMeals = plan.meals.filter((meal) => !meal.nutritionTracked);
+      const hasEmptyOfficeMeals = day.profile.officeDay && plan.meals.length === 1;
+
+      if (!hasEmptyOfficeMeals || untrackedMeals.length !== 0) {
+        console.error(
+          `FEIL ${day.profile.name}: bare kontordager kan ha tom frokost og lunsj`,
+        );
+        failed = true;
+      } else {
+        console.log(
+          `UFULLSTENDIG ${day.profile.name.padEnd(8)} ` +
+            `${actual.calories} kcal, P ${actual.protein}, F ${actual.fat}, K ${actual.carbs} ` +
+            `(frokost og lunsj er tomme)`,
+        );
+      }
+
+      continue;
+    }
+
     const differences = {
       calories: actual.calories - plan.target.calories,
       protein: actual.protein - plan.target.protein,

@@ -16,8 +16,11 @@ export interface PlannedMeal {
   ingredients: IngredientAmount[];
   omittedRecipeGroceryItems?: GroceryItemId[];
   sharedWithFamily?: boolean;
+  nutritionTracked?: boolean;
   details?: string[];
 }
+
+export type DaytimeMeal = PlannedMeal | null;
 
 export interface DinnerDefinition {
   recipe: RecipeReference;
@@ -109,15 +112,16 @@ export const nutritionTargets = {
 } as const;
 
 export const mealPlanNutritionMetadata = {
-  calculatedAt: "2026-08-10",
+  calculatedAt: "2026-08-17",
   notes: [
-    "Fredriks grunnplan ligger rundt 1 950 kcal med minst 160 g protein hver dag.",
+    "Dager med full måltidsplan ligger rundt 1 950 kcal med minst 160 g protein.",
     "Oppskriftenes kjerneingredienser og fettmengder beholdes. Karbohydrat maksimeres deretter, med omtrent 200 g som et mykt mål.",
     "Banan, dadler og eventuelt ett eller to egg på aktive dager er valgfritt drivstoff i tillegg til grunnplanen og er ikke medregnet.",
     "Kalkunkjøttdeig bruker Kalkun, kjøtt med skinn, rå som nærmeste tilgjengelige Matvaretabellen-verdi.",
     "Avokadoolje bruker extra virgin olivenolje som nærmeste tilgjengelige Matvaretabellen-verdi; begge er rene fettkilder.",
     "Kyllinglår med skinn bruker kyllinglår uten skinn som nærmeste tilgjengelige Matvaretabellen-verdi.",
     "Lørdagens eggerøre lages dobbelt, og søndagsporsjonen kjøles raskt ned. Proteinvaflene lages til hele familien begge helgedager.",
+    "Frokost og lunsj er ikke planlagt mandag og torsdag; bare middagen er medregnet i dagens makrototal og handleliste.",
   ],
 } as const;
 
@@ -129,7 +133,7 @@ export const fredrikFuelTrial = {
   preTrainingCarbs: 30,
   previousGuidance: "Valgfri banan eller dadler uten fast mengde før aktive dager.",
   guidance:
-    "karbohydrat 20–30 minutter før morgenøkter. Dette kommer i tillegg til grunnplanen; de tre faste måltidene og proteinmålet beholdes.",
+    "karbohydrat 20–30 minutter før morgenøkter. Dette kommer i tillegg til dagens planlagte måltider.",
   successCriteria:
     "Vurder følelse og fart ved sammenlignbar intensitet, evne til å holde planlagt sykkelwatt og vekttrend.",
 } as const;
@@ -138,37 +142,6 @@ const recipeRef = (
   category: RecipeReference["category"],
   slug: string,
 ): RecipeReference => ({ category, slug });
-
-const officeBreakfast = (
-  cottageCheese: number,
-  banana: number,
-  walnuts: number,
-  honey: number,
-): PlannedMeal => ({
-  title: "Cottage cheese med banan og valnøtter",
-  ingredients: [
-    { foodId: "01.028", grams: cottageCheese, label: "cottage cheese" },
-    { foodId: "06.525", grams: banana, label: "banan" },
-    { foodId: "06.560", grams: walnuts, label: "valnøtter" },
-    ...(honey > 0
-      ? [{ foodId: "09.003" as const, grams: honey, label: "rå honning" }]
-      : []),
-  ],
-  details: ["Pakkes på under to minutter kvelden før; bananen kan tas med hel."],
-});
-
-const officeLunch = (
-  tuna: number,
-  sweetPotato: number,
-): PlannedMeal => ({
-  recipe: recipeRef("lunsj", "tunfisktarn-med-sotpotet"),
-  ingredients: [
-    { foodId: "04.107", grams: tuna, label: "tunfisk i olje, avrent" },
-    { foodId: "06.010", grams: 100, label: "agurk" },
-    { foodId: "06.136", grams: sweetPotato, label: "søtpotet" },
-  ],
-  details: ["Søtpoteten bakes i batch; tunfisken åpnes når måltidet settes sammen."],
-});
 
 const morningScramble = (
   protein: "karbonadedeig" | "ytrefilet",
@@ -234,11 +207,8 @@ const weekendProteinWaffles: PlannedMeal = {
   ],
 };
 
-export const daytimeMeals: Record<DayName, [PlannedMeal, PlannedMeal]> = {
-  Mandag: [
-    officeBreakfast(250, 230, 5, 15),
-    officeLunch(300, 450),
-  ],
+export const daytimeMeals: Record<DayName, [DaytimeMeal, DaytimeMeal]> = {
+  Mandag: [null, null],
   Tirsdag: [
     morningScramble("ytrefilet", 225, 85, [
       "Lag dobbel kjøtt- og grønnsaksbase; halvparten settes kaldt til onsdag.",
@@ -255,16 +225,13 @@ export const daytimeMeals: Record<DayName, [PlannedMeal, PlannedMeal]> = {
       "Bruk den ferdige kyllingen og søtpoteten fra tirsdag; tilsett grønnkål ved servering.",
     ]),
   ],
-  Torsdag: [
-    officeBreakfast(425, 385, 5, 21),
-    officeLunch(250, 200),
-  ],
+  Torsdag: [null, null],
   Fredag: [
     morningScramble("ytrefilet", 250, 10, [
       "Ytrefileten stekes raskt i strimler og vendes inn i samme eggerørebase som tirsdag og onsdag.",
     ]),
-    hormoneHarmonyBowl("norsk røkt laks", 130, 170, [
-      "Bruk norsk røkt laks med kun laks og salt i ingredienslisten; ingen varmebehandling er nødvendig.",
+    hormoneHarmonyBowl("kyllingfilet", 200, 255, [
+      "Kyllingen stekes på forhånd og pakkes kald sammen med resten av bollen.",
     ]),
   ],
   Lørdag: [
