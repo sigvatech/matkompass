@@ -63,4 +63,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Rød- og grønnkål er blant de mest sulforafanrike grønnsakene som finnes, og støtter leverens avgiftning samt reduserer systemisk inflammasjon. Ingefær og hvitløk tilfører betennelsesdempende og antimikrobielle forbindelser, mens dressingen med mandelsmør gir sunt fett som gjør hvert næringsstoff mer biotilgjengelig. Denne kålsalaten fungerer som tilbehør eller som topping på grillet protein.
+Rød- og grønnkål er blant de mest sulforafanrike grønnsakene som finnes, og støtter leverens detoxprosesser samt reduserer systemisk inflammasjon. Ingefær og hvitløk tilfører betennelsesdempende og antimikrobielle forbindelser, mens dressingen med mandelsmør gir sunt fett som gjør hvert næringsstoff mer biotilgjengelig. Denne kålsalaten fungerer som tilbehør eller som topping på grillet protein.

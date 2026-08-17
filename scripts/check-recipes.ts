@@ -36,7 +36,7 @@ for (const recipe of recipes) {
 }
 
 assert(
-  Math.abs(getFamilyScale(2, familyPreset) - 1.175) < 0.0001,
+  getFamilyScale(2, familyPreset) === 1,
   "Familiefaktoren for to grunnporsjoner er feil",
 );
 assert(
@@ -44,8 +44,8 @@ assert(
   "Ett barn skal tilsvare 0,35 voksenporsjon",
 );
 assert(
-  formatIngredientAmount({ amount: 450, unit: "g", text: "kylling" }, 1.175) ===
-    "530 g",
+  formatIngredientAmount({ amount: 450, unit: "g", text: "kylling" }, 1) ===
+    "450 g",
   "Gram skal avrundes til praktisk kjøkkenmengde",
 );
 assert(

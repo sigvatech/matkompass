@@ -36,8 +36,8 @@ export default async function FredrikWeekPlanPage() {
         <p className="eyebrow">Uke {week.weekNumber} · Plan {week.type}</p>
         <h1>Fredriks ukeplan</h1>
         <p className="page-intro__description">
-          Tre faste måltider hver dag. Protein er et absolutt gulv, oppskriftene
-          beholdes, og karbohydrat maksimeres innenfor energirammen.
+          Frokost og lunsj er tomme mandag og torsdag. De øvrige dagene har tre
+          planlagte måltider med gramvekter og beregnede makroer.
         </p>
         <p className="plan-intro__dates">{formatDateRange(week.start, week.end)}</p>
       </header>
@@ -64,9 +64,10 @@ export default async function FredrikWeekPlanPage() {
           <h2 id="dagsmaal">Samme grunnmål hver dag</h2>
         </div>
         <p>
-          Grunnplanen skal ligge innenfor ±100 kcal av 1 950 kcal og aldri under
-          160 g protein. Omtrent 200 g karbohydrat er et mykt mål; fett får variere
-          med oppskriftene. Valgfritt treningsdrivstoff kommer i tillegg.
+          På dager med full måltidsplan skal planen ligge innenfor ±100 kcal av
+          1 950 kcal og aldri under 160 g protein. Omtrent 200 g karbohydrat er et
+          mykt mål; fett får variere med oppskriftene. Valgfritt treningsdrivstoff
+          kommer i tillegg.
         </p>
       </section>
 
@@ -96,19 +97,17 @@ export default async function FredrikWeekPlanPage() {
           <p className="eyebrow">Minst mulig matlaging</p>
           <h2 id="batchplan">Batchmat for ukedager og helg.</h2>
           <p>
-            Mandag og torsdag pakkes på forhånd. Tirsdagens frokost og lunsj lages
-            dobbelt, slik at onsdag bare krever oppvarming og montering. Lørdagens
-            eggerøre lages samtidig til søndag, og proteinvaflene pakkes til familien.
+            Tirsdagens frokost og lunsj lages dobbelt, slik at onsdag bare krever
+            oppvarming og montering. Lørdagens eggerøre lages samtidig til søndag,
+            og proteinvaflene pakkes til familien.
           </p>
         </header>
         <div className="prep-guide__steps">
           <section>
             <p className="eyebrow">Søndag</p>
-            <h3>Gjør kontordagene klare</h3>
+            <h3>Start ukedagene</h3>
             <ul>
-              <li>Bak søtpotet til mandag og tirsdag.</li>
-              <li>Porsjoner cottage cheese, banan, valnøtter, honning og ferdigbakt søtpotet.</li>
-              <li>Pakk de kalde delene; åpne tunfisken ved servering.</li>
+              <li>Bak søtpotet til tirsdag.</li>
             </ul>
           </section>
           <section>
@@ -124,8 +123,7 @@ export default async function FredrikWeekPlanPage() {
             <p className="eyebrow">Onsdag kveld</p>
             <h3>Fyll opp til helgen</h3>
             <ul>
-              <li>Bak søtpotet til torsdag–søndag.</li>
-              <li>Pakk torsdagens cottage cheese-frokost og tunfisklunsj.</li>
+              <li>Bak søtpotet til fredag–søndag.</li>
               <li>Kok ekstra villris eller quinoa når middagen allerede bruker det, og frys porsjonene.</li>
             </ul>
           </section>
@@ -199,10 +197,15 @@ export default async function FredrikWeekPlanPage() {
                   {isToday ? <span className="fredrik-day__today-label">I dag</span> : null}
                 </div>
                 <NutritionSummary
-                  label="Planlagt / mål"
+                  label={day.nutritionComplete ? "Planlagt / mål" : "Kjent / mål"}
                   nutrition={day.nutrition}
                   target={day.target}
                 />
+                {!day.nutritionComplete ? (
+                  <p className="meal-card__detail">
+                    Frokost og lunsj er tomme; bare middagen er medregnet.
+                  </p>
+                ) : null}
               </header>
 
               <div className="meal-timeline">
@@ -221,7 +224,11 @@ export default async function FredrikWeekPlanPage() {
                       ))}
                     </ul>
                     {meal.details?.map((detail) => <p className="meal-card__detail" key={detail}>{detail}</p>)}
-                    <NutritionSummary label="Måltidet" nutrition={meal.nutrition} />
+                    {meal.nutritionTracked ? (
+                      <NutritionSummary label="Måltidet" nutrition={meal.nutrition} />
+                    ) : (
+                      <p className="meal-card__detail">Makroer ikke beregnet.</p>
+                    )}
                   </section>
                 ))}
               </div>

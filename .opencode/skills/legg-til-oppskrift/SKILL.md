@@ -24,7 +24,7 @@ Les disse filene på nytt ved hver kjøring:
 
 Ikke oppretthold en egen ingrediensliste i skillen. Nettsidens innhold er den eneste sannhetskilden.
 
-En oppskriftsfil beskriver kilderetten og dens ordinære porsjonsantall. Ingrediensene lagres strukturert i filens frontmatter. `baseAdultPortions` angir hvor mange voksenporsjoner originalmengden tilsvarer og er påkrevd for frokost, lunsj og middag. Middagsplanen fordeler hver ingrediens med 42,5 % til Fredrik, 42,5 % til Kamilla og 15 % til Josefine, uten personlige tillegg. Fordelingen skal ikke bakes inn i oppskriftsfilen.
+En oppskriftsfil beskriver kilderetten og dens ordinære porsjonsantall. Ingrediensene lagres strukturert i filens frontmatter. `baseAdultPortions` angir hvor mange voksenporsjoner originalmengden tilsvarer og er påkrevd for frokost, lunsj og middag. Oppskriftssiden bruker to voksne og ingen barn som familiens standardporsjon. Middagsplanen fordeler hver ingrediens likt mellom Fredrik og Kamilla, uten personlige tillegg. Fordelingen skal ikke bakes inn i oppskriftsfilen.
 
 ## Arbeidsflyt
 

@@ -16,8 +16,11 @@ export interface PlannedMeal {
   ingredients: IngredientAmount[];
   omittedRecipeGroceryItems?: GroceryItemId[];
   sharedWithFamily?: boolean;
+  nutritionTracked?: boolean;
   details?: string[];
 }
+
+export type DaytimeMeal = PlannedMeal | null;
 
 export interface DinnerDefinition {
   recipe: RecipeReference;
@@ -109,15 +112,16 @@ export const nutritionTargets = {
 } as const;
 
 export const mealPlanNutritionMetadata = {
-  calculatedAt: "2026-08-10",
+  calculatedAt: "2026-08-17",
   notes: [
-    "Fredriks grunnplan ligger rundt 1 950 kcal med minst 160 g protein hver dag.",
+    "Dager med full måltidsplan ligger rundt 1 950 kcal med minst 160 g protein.",
     "Oppskriftenes kjerneingredienser og fettmengder beholdes. Karbohydrat maksimeres deretter, med omtrent 200 g som et mykt mål.",
     "Banan, dadler og eventuelt ett eller to egg på aktive dager er valgfritt drivstoff i tillegg til grunnplanen og er ikke medregnet.",
     "Kalkunkjøttdeig bruker Kalkun, kjøtt med skinn, rå som nærmeste tilgjengelige Matvaretabellen-verdi.",
     "Avokadoolje bruker extra virgin olivenolje som nærmeste tilgjengelige Matvaretabellen-verdi; begge er rene fettkilder.",
     "Kyllinglår med skinn bruker kyllinglår uten skinn som nærmeste tilgjengelige Matvaretabellen-verdi.",
     "Lørdagens eggerøre lages dobbelt, og søndagsporsjonen kjøles raskt ned. Proteinvaflene lages til hele familien begge helgedager.",
+    "Frokost og lunsj er ikke planlagt mandag og torsdag; bare middagen er medregnet i dagens makrototal og handleliste.",
   ],
 } as const;
 
@@ -129,7 +133,7 @@ export const fredrikFuelTrial = {
   preTrainingCarbs: 30,
   previousGuidance: "Valgfri banan eller dadler uten fast mengde før aktive dager.",
   guidance:
-    "karbohydrat 20–30 minutter før morgenøkter. Dette kommer i tillegg til grunnplanen; de tre faste måltidene og proteinmålet beholdes.",
+    "karbohydrat 20–30 minutter før morgenøkter. Dette kommer i tillegg til dagens planlagte måltider.",
   successCriteria:
     "Vurder følelse og fart ved sammenlignbar intensitet, evne til å holde planlagt sykkelwatt og vekttrend.",
 } as const;
@@ -138,37 +142,6 @@ const recipeRef = (
   category: RecipeReference["category"],
   slug: string,
 ): RecipeReference => ({ category, slug });
-
-const officeBreakfast = (
-  cottageCheese: number,
-  banana: number,
-  walnuts: number,
-  honey: number,
-): PlannedMeal => ({
-  title: "Cottage cheese med banan og valnøtter",
-  ingredients: [
-    { foodId: "01.028", grams: cottageCheese, label: "cottage cheese" },
-    { foodId: "06.525", grams: banana, label: "banan" },
-    { foodId: "06.560", grams: walnuts, label: "valnøtter" },
-    ...(honey > 0
-      ? [{ foodId: "09.003" as const, grams: honey, label: "rå honning" }]
-      : []),
-  ],
-  details: ["Pakkes på under to minutter kvelden før; bananen kan tas med hel."],
-});
-
-const officeLunch = (
-  tuna: number,
-  sweetPotato: number,
-): PlannedMeal => ({
-  recipe: recipeRef("lunsj", "tunfisktarn-med-sotpotet"),
-  ingredients: [
-    { foodId: "04.107", grams: tuna, label: "tunfisk i olje, avrent" },
-    { foodId: "06.010", grams: 100, label: "agurk" },
-    { foodId: "06.136", grams: sweetPotato, label: "søtpotet" },
-  ],
-  details: ["Søtpoteten bakes i batch; tunfisken åpnes når måltidet settes sammen."],
-});
 
 const morningScramble = (
   protein: "karbonadedeig" | "ytrefilet",
@@ -229,16 +202,13 @@ const weekendProteinWaffles: PlannedMeal = {
   omittedRecipeGroceryItems: ["protein-powder"],
   sharedWithFamily: true,
   details: [
-    "Mengdene viser Fredriks porsjon. Handlelisten skalerer vaflene til to voksne og ett barn.",
+    "Mengdene viser Fredriks porsjon. Handlelisten skalerer vaflene til to voksne.",
     "Avkjøl vaflene på rist før de pakkes, og hold cottage cheese kald frem til servering.",
   ],
 };
 
-export const daytimeMeals: Record<DayName, [PlannedMeal, PlannedMeal]> = {
-  Mandag: [
-    officeBreakfast(250, 230, 5, 15),
-    officeLunch(300, 450),
-  ],
+export const daytimeMeals: Record<DayName, [DaytimeMeal, DaytimeMeal]> = {
+  Mandag: [null, null],
   Tirsdag: [
     morningScramble("ytrefilet", 225, 85, [
       "Lag dobbel kjøtt- og grønnsaksbase; halvparten settes kaldt til onsdag.",
@@ -255,16 +225,13 @@ export const daytimeMeals: Record<DayName, [PlannedMeal, PlannedMeal]> = {
       "Bruk den ferdige kyllingen og søtpoteten fra tirsdag; tilsett grønnkål ved servering.",
     ]),
   ],
-  Torsdag: [
-    officeBreakfast(425, 385, 5, 21),
-    officeLunch(250, 200),
-  ],
+  Torsdag: [null, null],
   Fredag: [
     morningScramble("ytrefilet", 250, 10, [
       "Ytrefileten stekes raskt i strimler og vendes inn i samme eggerørebase som tirsdag og onsdag.",
     ]),
-    hormoneHarmonyBowl("norsk røkt laks", 130, 170, [
-      "Bruk norsk røkt laks med kun laks og salt i ingredienslisten; ingen varmebehandling er nødvendig.",
+    hormoneHarmonyBowl("kyllingfilet", 200, 255, [
+      "Kyllingen stekes på forhånd og pakkes kald sammen med resten av bollen.",
     ]),
   ],
   Lørdag: [
@@ -285,129 +252,129 @@ export const dinnerDefinitions: Record<string, DinnerDefinition> = {
   lemonChicken: {
     recipe: recipeRef("middag", "sitron-og-urtekylling-med-gronnsaker-i-en-panne"),
     plannedIngredients: [
-      { foodId: "03.332", grams: 430 },
-      { foodId: "05.340", grams: 433 },
-      { foodId: "06.018", grams: 250 },
-      { foodId: "06.048", grams: 200 },
-      { foodId: "06.085", grams: 250 },
-      { foodId: "08.112", grams: 16 },
+      { foodId: "03.332", grams: 365.5 },
+      { foodId: "05.340", grams: 368.05 },
+      { foodId: "06.018", grams: 212.5 },
+      { foodId: "06.048", grams: 170 },
+      { foodId: "06.085", grams: 212.5 },
+      { foodId: "08.112", grams: 13.6 },
     ],
   },
   salmonTacos: {
     recipe: recipeRef("middag", "laksetaco-i-hjertesalat"),
     plannedIngredients: [
-      { foodId: "04.015", grams: 420 },
-      { foodId: "05.340", grams: 455 },
-      { foodId: "06.207", grams: 150 },
-      { foodId: "06.010", grams: 300 },
-      { foodId: "06.752", grams: 150 },
-      { foodId: "06.042", grams: 100, label: "rødløk" },
-      { foodId: "06.524", grams: 132 },
+      { foodId: "04.015", grams: 357 },
+      { foodId: "05.340", grams: 386.75 },
+      { foodId: "06.207", grams: 127.5 },
+      { foodId: "06.010", grams: 255 },
+      { foodId: "06.752", grams: 127.5 },
+      { foodId: "06.042", grams: 85, label: "rødløk" },
+      { foodId: "06.524", grams: 112.2 },
     ],
   },
   steakTips: {
     recipe: recipeRef("middag", "biffbiter"),
     plannedIngredients: [
-      { foodId: "03.066", grams: 529 },
-      { foodId: "06.262", grams: 580 },
-      { foodId: "06.018", grams: 250 },
-      { foodId: "06.048", grams: 200 },
-      { foodId: "08.112", grams: 49 },
+      { foodId: "03.066", grams: 449.65 },
+      { foodId: "06.262", grams: 493 },
+      { foodId: "06.018", grams: 212.5 },
+      { foodId: "06.048", grams: 170 },
+      { foodId: "08.112", grams: 41.65 },
     ],
   },
   castIronSteak: {
     recipe: recipeRef("middag", "stopjernsbiff-med-avgiftende-bladgront"),
     plannedIngredients: [
-      { foodId: "03.066", grams: 405 },
-      { foodId: "06.262", grams: 620 },
-      { foodId: "06.035", grams: 300 },
-      { foodId: "08.252", grams: 16 },
+      { foodId: "03.066", grams: 344.25 },
+      { foodId: "06.262", grams: 527 },
+      { foodId: "06.035", grams: 255 },
+      { foodId: "08.252", grams: 13.6 },
     ],
   },
   salmonPoke: {
     recipe: recipeRef("middag", "poke-med-varmebehandlet-laks-og-quinoa"),
     plannedIngredients: [
-      { foodId: "04.015", grams: 353 },
-      { foodId: "06.616", grams: 466 },
-      { foodId: "06.093", grams: 300 },
-      { foodId: "06.036", grams: 150 },
-      { foodId: "06.010", grams: 250 },
-      { foodId: "08.112", grams: 16 },
-      { foodId: "05.030", grams: 16 },
+      { foodId: "04.015", grams: 300.05 },
+      { foodId: "06.616", grams: 396.1 },
+      { foodId: "06.093", grams: 255 },
+      { foodId: "06.036", grams: 127.5 },
+      { foodId: "06.010", grams: 212.5 },
+      { foodId: "08.112", grams: 13.6 },
+      { foodId: "05.030", grams: 13.6 },
     ],
   },
   turkeyMeatballs: {
     recipe: recipeRef("middag", "rene-kalkunkjottboller-med-blomkalmos"),
     plannedIngredients: [
-      { foodId: "03.004", grams: 264, label: "kalkunkjøttdeig" },
-      { foodId: "02.001", grams: 29 },
-      { foodId: "05.420", grams: 9 },
-      { foodId: "06.016", grams: 500 },
-      { foodId: "06.262", grams: 600 },
-      { foodId: "08.252", grams: 16 },
+      { foodId: "03.004", grams: 224.4, label: "kalkunkjøttdeig" },
+      { foodId: "02.001", grams: 24.65 },
+      { foodId: "05.420", grams: 7.65 },
+      { foodId: "06.016", grams: 425 },
+      { foodId: "06.262", grams: 510 },
+      { foodId: "08.252", grams: 13.6 },
     ],
   },
   beefBurgers: {
     recipe: recipeRef("middag", "salatinnpakkede-storfeburgere"),
     plannedIngredients: [
-      { foodId: "03.126", grams: 529 },
-      { foodId: "06.136", grams: 350 },
-      { foodId: "06.524", grams: 176 },
-      { foodId: "06.138", grams: 150 },
-      { foodId: "06.042", grams: 100, label: "rødløk" },
-      { foodId: "08.112", grams: 16, label: "avokadoolje" },
+      { foodId: "03.126", grams: 449.65 },
+      { foodId: "06.136", grams: 297.5 },
+      { foodId: "06.524", grams: 149.6 },
+      { foodId: "06.138", grams: 127.5 },
+      { foodId: "06.042", grams: 85, label: "rødløk" },
+      { foodId: "08.112", grams: 13.6, label: "avokadoolje" },
     ],
   },
   lemonSalmon: {
     recipe: recipeRef("middag", "villaks-med-sitron-dill-og-ovnsstekte-gronnsaker"),
     plannedIngredients: [
-      { foodId: "04.015", grams: 300 },
-      { foodId: "06.262", grams: 620 },
-      { foodId: "06.018", grams: 250 },
-      { foodId: "06.085", grams: 250 },
-      { foodId: "08.112", grams: 16 },
+      { foodId: "04.015", grams: 255 },
+      { foodId: "06.262", grams: 527 },
+      { foodId: "06.018", grams: 212.5 },
+      { foodId: "06.085", grams: 212.5 },
+      { foodId: "08.112", grams: 13.6 },
     ],
   },
   chickenCurry: {
     recipe: recipeRef("middag", "betennelsesdempende-kyllingcurrybolle"),
     plannedIngredients: [
-      { foodId: "03.205", grams: 264 },
-      { foodId: "06.701", grams: 141 },
-      { foodId: "05.340", grams: 470 },
-      { foodId: "06.085", grams: 250 },
-      { foodId: "06.016", grams: 350 },
-      { foodId: "08.249", grams: 8 },
+      { foodId: "03.205", grams: 224.4 },
+      { foodId: "06.701", grams: 119.85 },
+      { foodId: "05.340", grams: 399.5 },
+      { foodId: "06.085", grams: 212.5 },
+      { foodId: "06.016", grams: 297.5 },
+      { foodId: "08.249", grams: 6.8 },
     ],
   },
   tacoBowl: {
     recipe: recipeRef("middag", "tacobowl-med-sotpotet-og-cottage-cheese"),
     plannedIngredients: [
-      { foodId: "03.126", grams: 353 },
-      { foodId: "01.028", grams: 235 },
-      { foodId: "06.136", grams: 350 },
-      { foodId: "06.752", grams: 200 },
-      { foodId: "06.524", grams: 176 },
-      { foodId: "08.252", grams: 39, label: "ghee og smør" },
+      { foodId: "03.126", grams: 300.05 },
+      { foodId: "01.028", grams: 199.75 },
+      { foodId: "06.136", grams: 297.5 },
+      { foodId: "06.752", grams: 170 },
+      { foodId: "06.524", grams: 149.6 },
+      { foodId: "08.252", grams: 33.15, label: "ghee og smør" },
     ],
   },
   garlicShrimp: {
     recipe: recipeRef("middag", "hvitloksreker-med-squashnudler-i-en-panne"),
     plannedIngredients: [
-      { foodId: "04.387", grams: 529 },
-      { foodId: "05.340", grams: 500 },
-      { foodId: "06.085", grams: 600 },
-      { foodId: "08.112", grams: 33 },
+      { foodId: "04.387", grams: 449.65 },
+      { foodId: "05.340", grams: 425 },
+      { foodId: "06.085", grams: 510 },
+      { foodId: "08.112", grams: 28.05 },
     ],
   },
   chickenStew: {
     recipe: recipeRef("middag", "kyllinggryte-med-gurkemeie-og-kokos"),
     plannedIngredients: [
-      { foodId: "03.332", grams: 264, label: "kyllinglår" },
-      { foodId: "06.701", grams: 141 },
-      { foodId: "06.262", grams: 620 },
-      { foodId: "06.085", grams: 250 },
-      { foodId: "06.042", grams: 150 },
-      { foodId: "08.249", grams: 8 },
+      { foodId: "03.332", grams: 224.4, label: "kyllinglår" },
+      { foodId: "06.701", grams: 119.85 },
+      { foodId: "06.262", grams: 527 },
+      { foodId: "06.085", grams: 212.5 },
+      { foodId: "06.042", grams: 127.5 },
+      { foodId: "08.249", grams: 6.8 },
     ],
   },
 };

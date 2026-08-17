@@ -4,10 +4,15 @@ import { useEffect } from "react";
 
 interface ScrollToTargetProps {
   block?: ScrollLogicalPosition;
+  behavior?: ScrollBehavior;
   targetId: string;
 }
 
-export function ScrollToTarget({ block = "center", targetId }: ScrollToTargetProps) {
+export function ScrollToTarget({
+  block = "center",
+  behavior = "smooth",
+  targetId,
+}: ScrollToTargetProps) {
   useEffect(() => {
     if (window.location.hash) {
       return;
@@ -22,13 +27,13 @@ export function ScrollToTarget({ block = "center", targetId }: ScrollToTargetPro
     const animationFrame = window.requestAnimationFrame(() => {
       const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       target.scrollIntoView({
-        behavior: reducedMotion ? "auto" : "smooth",
+        behavior: reducedMotion ? "auto" : behavior,
         block,
       });
     });
 
     return () => window.cancelAnimationFrame(animationFrame);
-  }, [block, targetId]);
+  }, [behavior, block, targetId]);
 
   return null;
 }

@@ -54,4 +54,4 @@ Stek i 30–35 minutter til kyllingen er gjennomstekt og grønnsakene er møre.
 
 ## Hvorfor den fungerer
 
-Kyllinglår med skinn er rikere på kollagen, B-vitaminer og sink enn kyllingbryst. Brokkoli gir indol-3-karbinol for avgiftning av østrogen og sulforafan for cellefornyelse. Paprika tilfører vitamin C for å øke opptaket av jern fra kyllingen, og rosmarin bidrar med karnosinsyre, en potent nevrobeskyttende antioksidant.
+Kyllinglår med skinn er rikere på kollagen, B-vitaminer og sink enn kyllingbryst. Brokkoli gir indol-3-karbinol for detox av østrogen og sulforafan for cellefornyelse. Paprika tilfører vitamin C for å øke opptaket av jern fra kyllingen, og rosmarin bidrar med karnosinsyre, en potent nevrobeskyttende antioksidant.

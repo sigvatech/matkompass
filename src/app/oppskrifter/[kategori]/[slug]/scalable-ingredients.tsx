@@ -59,8 +59,8 @@ export function ScalableIngredients({
               </button>
               <button
                 type="button"
-                className={family?.adults === 2 && family?.children === 1 ? "is-active" : ""}
-                aria-pressed={family?.adults === 2 && family?.children === 1}
+                className={family?.adults === 2 && family?.children === 0 ? "is-active" : ""}
+                aria-pressed={family?.adults === 2 && family?.children === 0}
                 onClick={() => setFamily(familyPreset)}
               >
                 Vår familie
@@ -92,7 +92,7 @@ export function ScalableIngredients({
 
             <p className="serving-controls__summary" aria-live="polite">
               {family
-                ? `${family.adults} voksne + ${family.children} barn · ${new Intl.NumberFormat("nb-NO", { maximumFractionDigits: 2 }).format(scale)}× originalen`
+                ? `${family.adults} voksne${family.children > 0 ? ` + ${family.children} barn` : ""} · ${new Intl.NumberFormat("nb-NO", { maximumFractionDigits: 2 }).format(scale)}× originalen`
                 : "Viser originaloppskriften"}
             </p>
             <p className="serving-controls__note">

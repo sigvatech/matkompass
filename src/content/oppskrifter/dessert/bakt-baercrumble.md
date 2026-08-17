@@ -47,4 +47,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Økologiske bær er blant de mest polyfenolrike matvarene som finnes, og tilfører antocyaniner og ellaginsyre som reduserer betennelse i tarmen, gir næring til gunstige bakterier i mikrobiomet og støtter kroppens naturlige avgiftningsveier. Chiafrø tilfører løselig fiber som bremser glukoseopptaket og gir næring til tarmslimhinnen. Mandelmel erstatter korn med magnesiumrikt, sunt fett, og kanel holder blodsukkeret stabilt hele veien.
+Økologiske bær er blant de mest polyfenolrike matvarene som finnes, og tilfører antocyaniner og ellaginsyre som reduserer betennelse i tarmen, gir næring til gunstige bakterier i mikrobiomet og støtter kroppens naturlige detoxprosesser. Chiafrø tilfører løselig fiber som bremser glukoseopptaket og gir næring til tarmslimhinnen. Mandelmel erstatter korn med magnesiumrikt, sunt fett, og kanel holder blodsukkeret stabilt hele veien.

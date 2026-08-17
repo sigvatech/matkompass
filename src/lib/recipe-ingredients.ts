@@ -1,7 +1,7 @@
 import type { GroceryItemId } from "../content/grocery-catalog";
 
 export const childPortionFactor = 0.35;
-export const familyPreset = { adults: 2, children: 1 } as const;
+export const familyPreset = { adults: 2, children: 0 } as const;
 
 export interface FamilySize {
   adults: number;

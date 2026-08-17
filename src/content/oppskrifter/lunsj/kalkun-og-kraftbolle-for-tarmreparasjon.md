@@ -40,4 +40,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Kraft på bein er en av de mest målrettede matvarene for å reparere tarmslimhinnen, rik på glysin, prolin og kollagenpeptider som tetter tarmpermeabilitet og reduserer lekk tarm. Spinat gir forløpere til glutation som støtter avgiftning, mens kvernet kalkun tilfører biotilgjengelig protein som er skånsomt for et fordøyelsessystem i bedring. Gurkemeie holder systemisk betennelse nede gjennom hele reparasjonsprosessen.
+Kraft på bein er en av de mest målrettede matvarene for å reparere tarmslimhinnen, rik på glysin, prolin og kollagenpeptider som tetter tarmpermeabilitet og reduserer lekk tarm. Spinat gir forløpere til glutation som støtter detox, mens kvernet kalkun tilfører biotilgjengelig protein som er skånsomt for et fordøyelsessystem i bedring. Gurkemeie holder systemisk betennelse nede gjennom hele reparasjonsprosessen.

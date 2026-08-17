@@ -25,7 +25,7 @@ ingredients:
         text: "eplecidereddik"
         optional: true
 tags:
-  - Støtter avgiftning
+  - Støtter detox
   - Smak uten inflammasjon
   - Null søppel
 adapted: false
@@ -40,4 +40,4 @@ adaptationNote: ""
 
 ## Hvorfor den fungerer
 
-Persille er rik på apigenin og klorofyll, forbindelser som støtter nyrefunksjonen, lymfedrenasje og naturlig avgiftning. Hvitløk gir allicin for immunforsvar og betennelsesdempende virkning, mens olivenolje fungerer som transportør for fettløselige næringsstoffer og fører antioksidanter direkte inn i cellene. Dette er mat som fungerer som medisin uten å smake slik.
+Persille er rik på apigenin og klorofyll, forbindelser som støtter nyrefunksjonen, lymfedrenasje og naturlig detox. Hvitløk gir allicin for immunforsvar og betennelsesdempende virkning, mens olivenolje fungerer som transportør for fettløselige næringsstoffer og fører antioksidanter direkte inn i cellene. Dette er mat som fungerer som medisin uten å smake slik.

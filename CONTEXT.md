@@ -12,9 +12,13 @@ En dag uten planlagt treningsøkt der Fredrik følger mål for energiinntak på 
 
 En dag der Fredrik arbeider på kontoret og trenger måltider som er enkle å ta med og spise. Kontordager er mandag og torsdag. En kontordag kan være enten aktiv dag eller hviledag.
 
+## Familieporsjon
+
+Familiens gjeldende standardporsjon er to voksne og ingen barn. Oppskrifter åpnes med denne porsjonen valgt, men kan skaleres til andre antall voksne og barn.
+
 ## Middagsfordeling
 
-Den faste prosentvise fordelingen av hele middagsretten mellom Fredrik, Kamilla og Josefine. Hver ingrediens fordeles med 42,5 % til Fredrik, 42,5 % til Kamilla og 15 % til Josefine. Ingen får personlige middagstillegg. Josefines andel er en planlagt serveringsmengde, ikke et krav om at hun spiser opp.
+Den faste fordelingen av hele middagsretten mellom Fredrik og Kamilla. Hver ingrediens fordeles med 50 % til Fredrik og 50 % til Kamilla. Ingen får personlige middagstillegg.
 
 ## Kamillas aktive dager
 
@@ -36,6 +40,10 @@ Familien har ingen kjente allergier eller intoleranser. Sterk mat er ikke godt l
 
 Alt brukerrettet oppskriftsinnhold bruker norsk metrisk praksis: °C, g, kg, ml, dl og l. `ss` og `ts` kan brukes som kjøkkenmål. Amerikanske enheter som Fahrenheit, pund, unser, cups og pints skal konverteres ved import. Produktspesifikke måleskjeer kan beholdes når gramvekten varierer mellom produkter.
 
+## Kildebegreper
+
+Karakteristiske funksjonelle nøkkelord fra oppskriftenes LLM-wikikilder, som `detox` og `brain-boosting`, beholdes på engelsk. Vanlig forbindende tekst, ingredienser og fremgangsmåte skrives fortsatt på norsk.
+
 ## Biffdager
 
 Familien skal ha middag med storfekjøtt minst to dager hver uke. Tirsdag og fredag er faste biffdager. Biffoppskrifter kan gjentas mellom eller innenfor toukersplaner for å opprettholde denne rytmen.
@@ -52,10 +60,10 @@ Rotasjonen har nøyaktig to biffmiddager hver uke. `Histaminfattig kalkun- og sq
 | Dag | Uke A | Uke B |
 | --- | --- | --- |
 | Mandag | Sitron- og urtekylling med grønnsaker i én panne | Laksetaco i hjertesalat |
-| Tirsdag | Biffbiter | Støpejernsbiff med avgiftende bladgrønt |
+| Tirsdag | Biffbiter | Støpejernsbiff med detox-grønt |
 | Onsdag | Poke med varmebehandlet laks og quinoa | Rene kalkunkjøttboller med blomkålmos |
 | Torsdag | Salatinnpakkede storfeburgere | Villaks med sitron, dill og ovnsstekte grønnsaker |
-| Fredag | Støpejernsbiff med avgiftende bladgrønt | Biffbiter |
+| Fredag | Støpejernsbiff med detox-grønt | Biffbiter |
 | Lørdag | Betennelsesdempende kyllingcurrybolle | Tacobowl med søtpotet og cottage cheese |
 | Søndag | Hvitløksreker med squashnudler i én panne | Kyllinggryte med gurkemeie og kokos |
 
@@ -68,21 +76,21 @@ Fredriks gjeldende grunnmål er omtrent 1 950 kcal og minst 160 g protein hver d
 
 ## Fredriks måltidsrytme
 
-Alle dager har tre beregnede måltider: første måltid mellom kl. 10 og 11, andre måltid kl. 14 og familiemiddag kl. 17. Valgfritt drivstoff på aktive dager vises som veiledning, ikke som et beregnet fjerde måltid.
+Tirsdag, onsdag, fredag, lørdag og søndag har tre beregnede måltider: første måltid mellom kl. 10 og 11, andre måltid kl. 14 og familiemiddag kl. 17. Mandag og torsdag har tom frokost og lunsj, slik at bare familiemiddagen kl. 17 er planlagt. Valgfritt drivstoff på aktive dager vises som veiledning, ikke som et beregnet ekstra måltid.
 
 Frokost og lunsj følger samme ukedagsmønster i uke A og uke B. Porsjonene kan suppleres med fisk, kylling eller storfe for å treffe proteinmålet. Frokostoppskrifter med aminosyre- eller kollagenpulver er tillatt, selv om pulver ikke skal være standardgrunnlaget for nye måltider.
 
 Eggehvite brukes ikke som et separat proteintillegg i planen. Eggerettene beholder hele egg og får nødvendig tilleggsprotein fra karbonadedeig, ytrefilet eller kylling. Proteinvaflene serveres med ekstra cottage cheese i stedet for eggehvite.
 
-Mandag og torsdag er kontordager med de samme enkle rettene: vanlig cottage cheese med banan, valnøtter og litt honning til frokost, og tunfisk med agurk og batchbakt søtpotet til lunsj. Kontormåltidene inneholder verken eggehvite eller avokado. Tirsdag og onsdag bruker den samme eggerørebasen med ytrefilet og den samme hormonbalansebollen med kylling; tirsdagens porsjoner lages dobbelt og onsdagens varmes opp. Fredag bruker eggerøren med ytrefilet og hormonbalansebollen med norsk røkt laks. Norsk røkt laks er et uttrykkelig godkjent unntak når ingredienslisten kun inneholder laks og salt. Lørdag og søndag bruker den samme eggerøren med karbonadedeig til frokost og barnevennlige proteinvafler med cottage cheese til lunsj. Lørdagens eggerøre lages dobbelt, og søndagsporsjonen varmes opp. Vaflene lages til hele familien og kan pakkes med på tur. Frokost og lunsj er de samme i uke A og B; bare middagsrotasjonen varierer.
+Mandag og torsdag er kontordager uten planlagt frokost eller lunsj. Tirsdag og onsdag bruker den samme eggerørebasen med ytrefilet og den samme hormonbalansebollen med kylling; tirsdagens porsjoner lages dobbelt og onsdagens varmes opp. Fredag bruker eggerøren med ytrefilet og hormonbalansebollen med kylling. Lørdag og søndag bruker den samme eggerøren med karbonadedeig til frokost og barnevennlige proteinvafler med cottage cheese til lunsj. Lørdagens eggerøre lages dobbelt, og søndagsporsjonen varmes opp. Vaflene lages til hele familien og kan pakkes med på tur. Frokost og lunsj er de samme i uke A og B; bare middagsrotasjonen varierer.
 
 Søtpotet bakes i større porsjoner søndag og onsdag. Når familiemiddagen allerede krever villris eller quinoa, kan det kokes ekstra og fryses i porsjoner, men søtpotet er standard karbohydrat til Fredriks frokoster og lunsjer. Mat som skal spises senere i uken kjøles raskt ned og fryses fremfor å stå i kjøleskapet hele uken.
 
 ## Implementerte plansider
 
-`/middagsplan` viser inneværende og neste kalenderuke med familieingredienser, tilberedning og den faste prosentfordelingen. Fredrik og Kamilla får alltid identiske mengder av hver middagsingrediens. `/fredriks-ukeplan` viser inneværende kalenderuke med gramvekter og makroer per måltid og dag.
+`/middagsplan` viser inneværende og neste kalenderuke som en liste med lenker til oppskriftene. Dagens middag er fremhevet og vises umiddelbart. Ingredienser, fremgangsmåte, porsjonsfordeling og makroer vises ikke på denne siden. `/fredriks-ukeplan` viser inneværende kalenderuke med gramvekter og makroer per måltid og dag.
 
-Markdown-filen under `src/content/oppskrifter/` er eneste sannhetskilde for oppskriftens tittel, ingredienser og fremgangsmåte. Ingrediensene ligger strukturert i frontmatter. Oppskriftssiden kan skalere deklarerte mengder fra oppskriftens `baseAdultPortions`; én voksen tilsvarer Fredriks grunnporsjon, og ett barn tilsvarer 0,35 voksenporsjon. Ingredienser uten en sikker mengde, som «etter smak», skaleres ikke. Plandata skal bevare oppskriftens kjerneingredienser og fettmengder. Eventuelle planjusteringer gjøres i hele familiens grunnrett før den faste fordelingen; personlige middagstillegg brukes ikke.
+Markdown-filen under `src/content/oppskrifter/` er eneste sannhetskilde for oppskriftens tittel, ingredienser og fremgangsmåte. Ingrediensene ligger strukturert i frontmatter. Oppskriftssiden åpnes med familiens standardporsjon og kan skalere deklarerte mengder fra oppskriftens `baseAdultPortions`; ett barn tilsvarer 0,35 voksenporsjon når brukeren velger barn. Ingredienser uten en sikker mengde, som «etter smak», skaleres ikke. Plandata skal bevare oppskriftens kjerneingredienser og fettmengder. Eventuelle planjusteringer gjøres i hele familiens grunnrett før den faste fordelingen; personlige middagstillegg brukes ikke.
 
 Planlagte oppskrifter knytter hver ingrediens til én eller flere stabile dagligvareidentiteter i frontmatter. Plandata kan uttrykkelig utelate en slik dagligvare når planversjonen erstatter eller fjerner råvaren, men skal ikke kopiere oppskriftens originalmengde.
 

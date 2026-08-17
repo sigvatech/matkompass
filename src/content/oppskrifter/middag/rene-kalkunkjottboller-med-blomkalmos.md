@@ -63,4 +63,4 @@ Server kjøttbollene over blomkålmosen med friske bladgrønnsaker eller urter.
 
 ## Hvorfor den fungerer
 
-Kalkun gir komplette aminosyrer for muskelreparasjon og immunfunksjon, mens mandelmelet som bindemiddel holder retten kornfri uten å gå på bekostning av konsistensen. Blomkålmos stabiliserer blodsukkeret samtidig som den tilfører svovelforbindelser som støtter leverens avgiftning og tarmhelsen. Dette er den typen måltid der metabolsk reparasjon skjer stille i bakgrunnen.
+Kalkun gir komplette aminosyrer for muskelreparasjon og immunfunksjon, mens mandelmelet som bindemiddel holder retten kornfri uten å gå på bekostning av konsistensen. Blomkålmos stabiliserer blodsukkeret samtidig som den tilfører svovelforbindelser som støtter leverens detoxprosesser og tarmhelsen. Dette er den typen måltid der metabolsk reparasjon skjer stille i bakgrunnen.

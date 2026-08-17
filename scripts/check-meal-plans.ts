@@ -1,5 +1,5 @@
 import {
-  familyShares,
+  dinnerShares,
   getActiveFredrikFuelTrial,
   getCurrentPlanWeeks,
   getDinnerIngredients,
@@ -40,19 +40,36 @@ const steakRecipes = new Set([
   "biffbiter",
   "stopjernsbiff-med-avgiftende-bladgront",
 ]);
-const familyMembers = ["Fredrik", "Kamilla", "Josefine"] as const;
+const dinnerParticipants = ["Fredrik", "Kamilla"] as const;
 let failed = false;
 
-if (familyShares.Fredrik !== familyShares.Kamilla) {
+if (dinnerShares.Fredrik !== dinnerShares.Kamilla) {
   throw new Error("Fredrik og Kamilla skal alltid ha samme grunnandel av middagen");
 }
 
-if (Object.values(familyShares).reduce((sum, share) => sum + share, 0) !== 1) {
+if (Object.values(dinnerShares).reduce((sum, share) => sum + share, 0) !== 1) {
   throw new Error("Middagsandelene skal til sammen være 100 %");
 }
 
+if (Object.keys(dinnerShares).length !== 2) {
+  throw new Error("Middagsplanen skal bare fordeles mellom de to voksne");
+}
+
+const steakTipsDay = weeks
+  .flatMap((week) => week.days)
+  .find((day) => day.dinner.recipe.slug === "biffbiter");
+const fredriksSteak = steakTipsDay
+  ? getDinnerIngredients("Fredrik", steakTipsDay.dinner).find(
+      (ingredient) => ingredient.foodId === "03.066",
+    )
+  : undefined;
+
+if (!fredriksSteak || Math.abs(fredriksSteak.grams - 224.825) > 0.0001) {
+  throw new Error("To-voksenfordelingen skal bevare Fredriks eksisterende biffmengde");
+}
+
 for (const [day, meals] of Object.entries(daytimeMeals)) {
-  if (meals.some((meal) => meal.ingredients.some((ingredient) => ingredient.foodId === "02.002"))) {
+  if (meals.some((meal) => meal?.ingredients.some((ingredient) => ingredient.foodId === "02.002"))) {
     throw new Error(`${day} bruker eggehvite som separat proteintillegg`);
   }
 }
@@ -74,7 +91,7 @@ for (const week of weeks) {
   }
 
   for (const day of week.days) {
-    for (const person of familyMembers) {
+    for (const person of dinnerParticipants) {
       const ingredients = getDinnerIngredients(person, day.dinner);
       const hasExactShare =
         ingredients.length === day.dinner.plannedIngredients.length &&
@@ -82,7 +99,7 @@ for (const week of weeks) {
           (ingredient, index) =>
             ingredient.foodId === day.dinner.plannedIngredients[index].foodId &&
             ingredient.grams ===
-              day.dinner.plannedIngredients[index].grams * familyShares[person],
+              day.dinner.plannedIngredients[index].grams * dinnerShares[person],
         );
 
       if (!hasExactShare) {
@@ -95,6 +112,27 @@ for (const week of weeks) {
 
     const plan = getFredrikPlanDay(day);
     const actual = roundNutrition(plan.nutrition);
+
+    if (!plan.nutritionComplete) {
+      const untrackedMeals = plan.meals.filter((meal) => !meal.nutritionTracked);
+      const hasEmptyOfficeMeals = day.profile.officeDay && plan.meals.length === 1;
+
+      if (!hasEmptyOfficeMeals || untrackedMeals.length !== 0) {
+        console.error(
+          `FEIL ${day.profile.name}: bare kontordager kan ha tom frokost og lunsj`,
+        );
+        failed = true;
+      } else {
+        console.log(
+          `UFULLSTENDIG ${day.profile.name.padEnd(8)} ` +
+            `${actual.calories} kcal, P ${actual.protein}, F ${actual.fat}, K ${actual.carbs} ` +
+            `(frokost og lunsj er tomme)`,
+        );
+      }
+
+      continue;
+    }
+
     const differences = {
       calories: actual.calories - plan.target.calories,
       protein: actual.protein - plan.target.protein,

@@ -152,11 +152,13 @@ export function validateGroceryConfiguration(now = new Date("2026-07-20T12:00:00
 
 function getDayContributions(day: DatedPlanDay): GroceryContribution[] {
   const daytime = getFredrikDaytimePlan(day).flatMap((meal, index) =>
-    getMealContributions(
-      meal,
-      meal.sharedWithFamily ? familyPreset : { adults: 1, children: 0 },
-      `${day.profile.name} · ${index === 0 ? "kl. 10–11" : "kl. 14"}`,
-    ),
+    meal
+      ? getMealContributions(
+          meal,
+          meal.sharedWithFamily ? familyPreset : { adults: 1, children: 0 },
+          `${day.profile.name} · ${index === 0 ? "kl. 10–11" : "kl. 14"}`,
+        )
+      : [],
   );
   const dinner = getDinnerContributions(day.dinner, `${day.profile.name} · middag`);
 

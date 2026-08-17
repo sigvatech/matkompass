@@ -1,17 +1,9 @@
-import { NutritionSummary } from "@/app/_components/nutrition-summary";
 import { ScrollToTarget } from "@/app/_components/scroll-to-target";
 import {
-  calculateNutrition,
-  familyShares,
-  foodDataSource,
   formatDate,
   formatDateRange,
-  formatGrams,
   getCurrentPlanWeeks,
-  getDinnerIngredients,
-  getPlannedDinnerIngredients,
   getTodayInOslo,
-  mealPlanNutritionMetadata,
 } from "@/lib/meal-plan";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -20,10 +12,8 @@ import { connection } from "next/server";
 export const metadata: Metadata = {
   title: "Middagsplan",
   description:
-    "Familiens faste toukersplan med oppskrifter, mengder og tilpassede porsjoner.",
+    "Familiens faste toukersplan med én oppskrift for hver dag.",
 };
-
-const familyMembers = ["Fredrik", "Kamilla", "Josefine"] as const;
 
 export default async function DinnerPlanPage() {
   await connection();
@@ -32,36 +22,15 @@ export default async function DinnerPlanPage() {
 
   return (
     <main className="content-page plan-page">
-      <ScrollToTarget targetId="middag-i-dag" />
+      <ScrollToTarget behavior="auto" targetId="middag-i-dag" />
       <header className="page-intro plan-intro">
         <p className="eyebrow">Denne og neste kalenderuke</p>
         <h1>Middagsplan</h1>
         <p className="page-intro__description">
-          En fast A/B-rotasjon med to biffdager hver uke. Grunnretten deles
-          likt etter den faste familieprosenten, uten personlige tillegg.
+          Se hva vi skal spise i dag, og åpne oppskriften for ingredienser og
+          fremgangsmåte.
         </p>
       </header>
-
-      <section className="plan-rules" aria-labelledby="fordeling">
-        <div>
-          <p className="eyebrow">Grunnfordeling</p>
-          <h2 id="fordeling">42,5 · 42,5 · 15</h2>
-        </div>
-        <dl>
-          <div>
-            <dt>Fredrik</dt>
-            <dd>42,5 %</dd>
-          </div>
-          <div>
-            <dt>Kamilla</dt>
-            <dd>42,5 %</dd>
-          </div>
-          <div>
-            <dt>Josefine</dt>
-            <dd>15 %</dd>
-          </div>
-        </dl>
-      </section>
 
       {weeks.map((week, weekIndex) => (
         <section className="plan-week" key={week.weekNumber} aria-labelledby={`uke-${week.weekNumber}`}>
@@ -74,89 +43,30 @@ export default async function DinnerPlanPage() {
           </header>
 
           <div className="dinner-plan-list">
-            {week.days.map((day, dayIndex) => {
+            {week.days.map((day) => {
               const date = day.date.toISOString().slice(0, 10);
               const isToday = date === today;
 
               return (
-                <details
+                <Link
                   className={`dinner-plan-day${isToday ? " dinner-plan-day--today" : ""}`}
+                  href={day.dinner.href}
                   key={day.date.toISOString()}
-                  open={isToday}
+                  id={isToday ? "middag-i-dag" : undefined}
                 >
-                  <summary id={isToday ? "middag-i-dag" : undefined}>
-                    <span className="dinner-plan-day__date">
-                      <strong>{day.profile.shortName}</strong>
-                      <time dateTime={date} aria-current={isToday ? "date" : undefined}>
-                        {formatDate(day.date)}
-                      </time>
-                      {isToday ? <span className="dinner-plan-day__today-label">I dag</span> : null}
-                    </span>
-                    <span className="dinner-plan-day__title">{day.dinner.title}</span>
-                    <span className="dinner-plan-day__badges">
-                      {dayIndex === 1 || dayIndex === 4 ? <span>Biffdag</span> : null}
-                      {day.profile.fredrikTrains ? <span>Fredrik trener</span> : null}
-                      {day.profile.kamillaTrains ? <span>Kamilla trener</span> : null}
-                    </span>
-                    <span className="dinner-plan-day__toggle" aria-hidden="true">+</span>
-                  </summary>
-
-                  <div className="dinner-plan-day__body">
-                    <div className="dinner-plan-day__column">
-                      <p className="eyebrow">Planmengder til grunnretten</p>
-                      <ul className="amount-list">
-                        {getPlannedDinnerIngredients(day.dinner).map((ingredient) => (
-                          <li key={`${ingredient.foodId}-${ingredient.label}`}>
-                            <span>{ingredient.label}</span>
-                            <strong>{formatGrams(ingredient.grams)}</strong>
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="seasoning-line">
-                        Krydder, smakstilsetninger og originalmengder hentes fra oppskriften.
-                      </p>
-                    </div>
-
-                    <div className="dinner-plan-day__column">
-                      <p className="eyebrow">Tilberedning</p>
-                      <ol className="plan-steps">
-                        {day.dinner.instructions.map((step) => <li key={step}>{step}</li>)}
-                      </ol>
-                    </div>
-
-                    <div className="dinner-plan-day__portions">
-                      {familyMembers.map((person) => (
-                        <NutritionSummary
-                          key={person}
-                          label={`${person} · ${familyShares[person] * 100} %`}
-                          nutrition={calculateNutrition(getDinnerIngredients(person, day.dinner))}
-                        />
-                      ))}
-                    </div>
-
-                    <Link href={day.dinner.href} className="primary-link">
-                      Åpne hele oppskriften <span aria-hidden="true">→</span>
-                    </Link>
-                  </div>
-                </details>
+                  <span className="dinner-plan-day__date">
+                    <strong>{day.profile.shortName}</strong>
+                    <time dateTime={date} aria-current={isToday ? "date" : undefined}>
+                      {formatDate(day.date)}
+                    </time>
+                  </span>
+                  <span className="dinner-plan-day__title">{day.dinner.title}</span>
+                </Link>
               );
             })}
           </div>
         </section>
       ))}
-
-      <aside className="plan-source" aria-labelledby="beregning">
-        <p className="eyebrow">Beregning</p>
-        <h2 id="beregning">Representative verdier, praktiske porsjoner.</h2>
-        <p>
-          Energi og makroer er beregnet fra råvarevekt med data fra {foodDataSource.name},
-          hentet {foodDataSource.retrievedAt}. Planen ble beregnet
-          {` ${mealPlanNutritionMetadata.calculatedAt}`}. Krydder, sitrus og kraft med
-          ubetydelig energibidrag er ikke tatt med i totalsummene.
-        </p>
-        {mealPlanNutritionMetadata.notes.map((note) => <p key={note}>{note}</p>)}
-        <a href="https://www.matvaretabellen.no/" rel="noreferrer">Se Matvaretabellen</a>
-      </aside>
     </main>
   );
 }

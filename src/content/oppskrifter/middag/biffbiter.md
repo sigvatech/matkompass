@@ -57,4 +57,4 @@ La hvile i 5 minutter før servering. Server med ovnsstekte grønnsaker, avokado
 
 ## Hvorfor den fungerer
 
-Biff fra gressfôret storfe inneholder mer omega-3-fettsyrer og CLA, et fettstoff som støtter hormonbalanse, en mager kroppssammensetning og hjernefunksjon, enn storfekjøtt fra konvensjonelt oppdrett. Hvitløk og ferske urter tilfører betennelsesdempende og avgiftende forbindelser, mens sitronsaft stimulerer galleproduksjonen og støtter cellehelsen. Kokosaminos erstatter soyasaus med en ren, MSG-fri kilde til umami som ikke forstyrrer tarm- eller hormonfunksjonen.
+Biff fra gressfôret storfe inneholder mer omega-3-fettsyrer og CLA, et fettstoff som støtter hormonbalanse, en mager kroppssammensetning og hjernefunksjon, enn storfekjøtt fra konvensjonelt oppdrett. Hvitløk og ferske urter tilfører betennelsesdempende detox-forbindelser, mens sitronsaft stimulerer galleproduksjonen og støtter cellehelsen. Kokosaminos erstatter soyasaus med en ren, MSG-fri kilde til umami som ikke forstyrrer tarm- eller hormonfunksjonen.

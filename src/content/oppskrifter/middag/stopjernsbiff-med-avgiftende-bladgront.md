@@ -1,5 +1,5 @@
 ---
-title: "Støpejernsbiff med avgiftende bladgrønt"
+title: "Støpejernsbiff med detox-grønt"
 category: middag
 source: "https://members.theultimatehuman.com/posts/recipes-cast-iron-steak-detox-greens"
 yield: "2 porsjoner"
@@ -26,7 +26,7 @@ ingredients:
         groceryItems: ["lemon"]
       - text: "Havsalt og grovkvernet svart pepper etter smak"
         groceryItems: ["salt-pepper"]
-tags: ["Muskelrestitusjon", "Jernstøtte", "Fase II-avgiftning i leveren"]
+tags: ["Muskelrestitusjon", "Jernstøtte", "Fase II-detox i leveren"]
 adapted: false
 adaptationNote: ""
 ---
@@ -41,4 +41,4 @@ Server biffen over eller ved siden av bladgrønnsakene.
 
 ## Hvorfor den fungerer
 
-Biff fra gressfôret storfe gir kreatin for muskelkraft, B12 for nervefunksjon og hemjern for oksygentransport, tre næringsstoffer som direkte gir energi til fysisk ytelse og restitusjon. Grønnkål og mangold aktiverer fase II-avgiftningsenzymer i leveren gjennom innholdet av glukosinolater, noe som hjelper kroppen med å bearbeide og skille ut hormoner, giftstoffer og metabolsk avfall. Sitron driver galleproduksjonen for å fullføre avgiftningssyklusen. Dette er prestasjonsmat og funksjonell medisin på én tallerken.
+Biff fra gressfôret storfe gir kreatin for muskelkraft, B12 for nervefunksjon og hemjern for oksygentransport, tre næringsstoffer som direkte gir energi til fysisk ytelse og restitusjon. Grønnkål og mangold aktiverer fase II-detoxenzymer i leveren gjennom innholdet av glukosinolater, noe som hjelper kroppen med å bearbeide og skille ut hormoner, giftstoffer og metabolsk avfall. Sitron driver galleproduksjonen for å fullføre detoxsyklusen. Dette er prestasjonsmat og funksjonell medisin på én tallerken.
