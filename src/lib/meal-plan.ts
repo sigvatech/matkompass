@@ -45,7 +45,7 @@ export interface ResolvedIngredientAmount extends IngredientAmount {
   label: string;
 }
 
-export type FamilyMember = keyof typeof familyShares;
+export type DinnerParticipant = keyof typeof dinnerShares;
 
 export interface FredrikMeal {
   title: string;
@@ -62,7 +62,7 @@ export interface FredrikPlanDay extends DatedPlanDay {
   target: (typeof nutritionTargets)[keyof typeof nutritionTargets];
 }
 
-const familyShares = {
+const dinnerShares = {
   Fredrik: 0.5,
   Kamilla: 0.5,
 } as const;
@@ -72,7 +72,7 @@ const rotationEpoch = Date.UTC(2026, 6, 20);
 const millisecondsPerWeek = 7 * 86_400_000;
 
 export {
-  familyShares,
+  dinnerShares,
   foodDataSource,
   fredrikFuelTrial,
   mealPlanNutritionMetadata,
@@ -143,12 +143,12 @@ export function getFredrikDinnerIngredients(
 }
 
 export function getDinnerIngredients(
-  person: FamilyMember,
+  person: DinnerParticipant,
   dinner: DinnerDefinition,
 ): ResolvedIngredientAmount[] {
   return resolveIngredientLabels(dinner.plannedIngredients).map((ingredient) => ({
     ...ingredient,
-    grams: ingredient.grams * familyShares[person],
+    grams: ingredient.grams * dinnerShares[person],
   }));
 }
 

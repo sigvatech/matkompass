@@ -1,5 +1,5 @@
 import {
-  familyShares,
+  dinnerShares,
   getActiveFredrikFuelTrial,
   getCurrentPlanWeeks,
   getDinnerIngredients,
@@ -40,26 +40,26 @@ const steakRecipes = new Set([
   "biffbiter",
   "stopjernsbiff-med-avgiftende-bladgront",
 ]);
-const familyMembers = ["Fredrik", "Kamilla"] as const;
+const dinnerParticipants = ["Fredrik", "Kamilla"] as const;
 let failed = false;
 
-if (familyShares.Fredrik !== familyShares.Kamilla) {
+if (dinnerShares.Fredrik !== dinnerShares.Kamilla) {
   throw new Error("Fredrik og Kamilla skal alltid ha samme grunnandel av middagen");
 }
 
-if (Object.values(familyShares).reduce((sum, share) => sum + share, 0) !== 1) {
+if (Object.values(dinnerShares).reduce((sum, share) => sum + share, 0) !== 1) {
   throw new Error("Middagsandelene skal til sammen være 100 %");
 }
 
-if (Object.keys(familyShares).length !== 2) {
+if (Object.keys(dinnerShares).length !== 2) {
   throw new Error("Middagsplanen skal bare fordeles mellom de to voksne");
 }
 
-const steakTips = weeks
+const steakTipsDay = weeks
   .flatMap((week) => week.days)
   .find((day) => day.dinner.recipe.slug === "biffbiter");
-const fredriksSteak = steakTips
-  ? getDinnerIngredients("Fredrik", steakTips.dinner).find(
+const fredriksSteak = steakTipsDay
+  ? getDinnerIngredients("Fredrik", steakTipsDay.dinner).find(
       (ingredient) => ingredient.foodId === "03.066",
     )
   : undefined;
@@ -91,7 +91,7 @@ for (const week of weeks) {
   }
 
   for (const day of week.days) {
-    for (const person of familyMembers) {
+    for (const person of dinnerParticipants) {
       const ingredients = getDinnerIngredients(person, day.dinner);
       const hasExactShare =
         ingredients.length === day.dinner.plannedIngredients.length &&
@@ -99,7 +99,7 @@ for (const week of weeks) {
           (ingredient, index) =>
             ingredient.foodId === day.dinner.plannedIngredients[index].foodId &&
             ingredient.grams ===
-              day.dinner.plannedIngredients[index].grams * familyShares[person],
+              day.dinner.plannedIngredients[index].grams * dinnerShares[person],
         );
 
       if (!hasExactShare) {
