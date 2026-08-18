@@ -24,8 +24,6 @@ interface GroceryListPageProps {
   }>;
 }
 
-const maximumRangeDays = 31;
-
 export default async function GroceryListPage({ searchParams }: GroceryListPageProps) {
   await connection();
   const params = await searchParams;
@@ -42,12 +40,17 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
     ? getGroceryListForDateRange(customRange.range.start, customRange.range.end)
     : weeklyList;
   const isCustomRange = customRange.range !== undefined;
+  const hasRangeError = customRange.error !== undefined;
+  const startInputValue = parseDate(startValue) ? startValue : list.period.startDate;
+  const endInputValue = parseDate(endValue) ? endValue : list.period.endDate;
 
   return (
     <main className={`content-page ${styles.page}`}>
       <header className={`page-intro ${styles.intro}`}>
         <p className="eyebrow">
-          {isCustomRange
+          {hasRangeError
+            ? "Ugyldig periode"
+            : isCustomRange
             ? "Egendefinert periode"
             : `Uke ${weeklyList.week.weekNumber} · Plan ${weeklyList.week.type}`}
         </p>
@@ -56,7 +59,9 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
           Fredriks planlagte måltider og familiens middag, samlet uten å telle
           Fredriks middagsandel to ganger. Valgfritt treningsdrivstoff er ikke med.
         </p>
-        <p className={styles.dateRange}>{list.period.dateRange}</p>
+        <p className={styles.dateRange}>
+          {hasRangeError ? "Rett datoene for å vise handlelisten." : list.period.label}
+        </p>
       </header>
 
       <nav className={styles.weekNav} aria-label="Velg handleuke">
@@ -81,7 +86,7 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
           <p className="eyebrow">Egendefinert</p>
           <h2 id="velg-periode">Velg datoene du handler for.</h2>
           <p id="periode-hjelp">
-            Start- og sluttdato er med i handlelisten. Du kan velge opptil 31 dager.
+            Start- og sluttdato er med i handlelisten.
           </p>
         </div>
         <Form action="/handleliste" className={styles.rangeForm}>
@@ -90,7 +95,7 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
             <input
               aria-describedby={`periode-hjelp${customRange.error ? " periode-feil" : ""}`}
               aria-invalid={customRange.error ? true : undefined}
-              defaultValue={startValue ?? list.period.startDate}
+              defaultValue={startInputValue}
               name="fra"
               required
               type="date"
@@ -101,7 +106,7 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
             <input
               aria-describedby={`periode-hjelp${customRange.error ? " periode-feil" : ""}`}
               aria-invalid={customRange.error ? true : undefined}
-              defaultValue={endValue ?? list.period.endDate}
+              defaultValue={endInputValue}
               name="til"
               required
               type="date"
@@ -116,18 +121,23 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
         ) : null}
       </section>
 
-      <section className={styles.explainer} aria-labelledby="slik-leses-listen">
-        <div>
-          <p className="eyebrow">To mengder</p>
-          <h2 id="slik-leses-listen">Behov først, praktisk kjøpsmengde etterpå.</h2>
-        </div>
-        <p>
-          Kokt ris, quinoa og potet er omregnet til mengden som kjøpes. Butikklenkene
-          åpner et søk hos valgt butikk; pris og lagerstatus kontrolleres der.
-        </p>
-      </section>
+      {!hasRangeError ? (
+        <>
+          <section className={styles.explainer} aria-labelledby="slik-leses-listen">
+            <div>
+              <p className="eyebrow">To mengder</p>
+              <h2 id="slik-leses-listen">Behov først, praktisk kjøpsmengde etterpå.</h2>
+            </div>
+            <p>
+              Kokt ris, quinoa og potet er omregnet til mengden som kjøpes.
+              Butikklenkene åpner et søk hos valgt butikk; pris og lagerstatus
+              kontrolleres der.
+            </p>
+          </section>
 
-      <GroceryListClient list={list} />
+          <GroceryListClient list={list} />
+        </>
+      ) : null}
     </main>
   );
 }
@@ -153,12 +163,6 @@ function getCustomRange(startValue?: string, endValue?: string): {
 
   if (start > end) {
     return { error: "Startdatoen må være før eller lik sluttdatoen." };
-  }
-
-  const rangeDays = Math.floor((end.getTime() - start.getTime()) / 86_400_000) + 1;
-
-  if (rangeDays > maximumRangeDays) {
-    return { error: `Velg en periode på maksimalt ${maximumRangeDays} dager.` };
   }
 
   return { range: { start, end } };

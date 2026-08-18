@@ -58,7 +58,7 @@ export interface GroceryList {
   period: {
     startDate: string;
     endDate: string;
-    dateRange: string;
+    label: string;
   };
   lines: GroceryListLine[];
 }
@@ -67,8 +67,6 @@ export interface WeeklyGroceryList extends GroceryList {
   week: {
     type: "A" | "B";
     weekNumber: number;
-    startDate: string;
-    dateRange: string;
   };
 }
 
@@ -142,28 +140,46 @@ export function getWeeklyGroceryList(
     period: {
       startDate: week.start.toISOString().slice(0, 10),
       endDate: week.end.toISOString().slice(0, 10),
-      dateRange: formatDateRange(week.start, week.end),
+      label: formatDateRange(week.start, week.end),
     },
     week: {
       type: week.type,
       weekNumber: week.weekNumber,
-      startDate: week.start.toISOString().slice(0, 10),
-      dateRange: formatDateRange(week.start, week.end),
     },
     lines,
   };
 }
 
 export function getGroceryListForDateRange(start: Date, end: Date): GroceryList {
-  const days = getPlanDaysInRange(start, end);
+  const dayCount = Math.floor((end.getTime() - start.getTime()) / 86_400_000) + 1;
+
+  if (dayCount < 1) {
+    throw new Error("Startdato må være før eller lik sluttdato");
+  }
+
+  const rotationDays = 14;
+  const patternEnd = new Date(start);
+  patternEnd.setUTCDate(patternEnd.getUTCDate() + Math.min(dayCount, rotationDays) - 1);
+  const pattern = getPlanDaysInRange(start, patternEnd);
+  const completeRotations = Math.floor(dayCount / rotationDays);
+  const remainingDays = dayCount % rotationDays;
+  const contributions = pattern.flatMap((day, index) => {
+    const occurrences = completeRotations + (index < remainingDays ? 1 : 0);
+    return getDayContributions(day).map((contribution) => ({
+      ...contribution,
+      amount: contribution.amount === null
+        ? null
+        : contribution.amount * occurrences,
+    }));
+  });
 
   return {
     period: {
       startDate: start.toISOString().slice(0, 10),
       endDate: end.toISOString().slice(0, 10),
-      dateRange: formatDateRange(start, end),
+      label: formatDateRange(start, end),
     },
-    lines: aggregateContributions(days.flatMap((day) => getDayContributions(day))),
+    lines: aggregateContributions(contributions),
   };
 }
 
