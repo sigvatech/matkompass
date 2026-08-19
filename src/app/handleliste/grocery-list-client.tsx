@@ -30,8 +30,9 @@ const sectionLabels = {
 const sectionOrder = { buy: 0, check: 1, optional: 2 } as const;
 
 export function GroceryListClient({ list }: GroceryListClientProps) {
-  const checkedStorageKey =
-    `matkompass:grocery-checked:${list.period.startDate}:${list.period.endDate}:v1`;
+  const checkedStorageKey = "week" in list
+    ? `matkompass:grocery-checked:${list.range.startDate}:v1`
+    : `matkompass:grocery-checked:${list.range.startDate}:${list.range.endDate}:v1`;
   const [sortMode, setSortMode] = useState<SortMode>("store");
   const [preferences, setPreferences] = useState<OfferPreferences>({});
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({});

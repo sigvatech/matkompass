@@ -224,7 +224,9 @@ export function normalizeToUtcDate(date: Date): Date {
     throw new Error("Ugyldig dato");
   }
 
-  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
+  const normalized = new Date(0);
+  normalized.setUTCFullYear(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  return normalized;
 }
 
 export function getTodayInOslo(now = new Date()): Date {

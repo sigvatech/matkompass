@@ -56,7 +56,7 @@ export interface GroceryListLine {
 }
 
 export interface GroceryList {
-  period: {
+  range: {
     startDate: string;
     endDate: string;
     label: string;
@@ -138,7 +138,7 @@ export function getWeeklyGroceryList(
   const lines = aggregateContributions(contributions);
 
   return {
-    period: {
+    range: {
       startDate: week.start.toISOString().slice(0, 10),
       endDate: week.end.toISOString().slice(0, 10),
       label: formatDateRange(week.start, week.end),
@@ -180,7 +180,7 @@ export function getGroceryListForDateRange(start: Date, end: Date): GroceryList 
   });
 
   return {
-    period: {
+    range: {
       startDate: normalizedStart.toISOString().slice(0, 10),
       endDate: normalizedEnd.toISOString().slice(0, 10),
       label: formatDateRange(normalizedStart, normalizedEnd),

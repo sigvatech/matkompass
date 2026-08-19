@@ -48,6 +48,16 @@ const singleDayDinnerSources = new Set(
 );
 assert(singleDayDinnerSources.size === 1, "En enkeltdato skal inkluderes nøyaktig én gang");
 
+const earlyYearList = getGroceryListForDateRange(
+  new Date("0099-07-21T12:00:00Z"),
+  new Date("0099-07-21T18:00:00Z"),
+);
+assert(
+  earlyYearList.range.startDate === "0099-07-21" &&
+    earlyYearList.range.endDate === "0099-07-21",
+  "År før 100 skal ikke forskyves til 1900-tallet",
+);
+
 const yearBoundaryList = getGroceryListForDateRange(
   new Date("2026-12-28T00:00:00Z"),
   new Date("2027-01-10T00:00:00Z"),

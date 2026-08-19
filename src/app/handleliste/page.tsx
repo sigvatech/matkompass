@@ -42,8 +42,8 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
     : weeklyList;
   const isCustomRange = customRange.range !== undefined;
   const hasRangeError = customRange.error !== undefined;
-  const startInputValue = parseDate(startValue) ? startValue : list.period.startDate;
-  const endInputValue = parseDate(endValue) ? endValue : list.period.endDate;
+  const startInputValue = parseDate(startValue) ? startValue : list.range.startDate;
+  const endInputValue = parseDate(endValue) ? endValue : list.range.endDate;
 
   return (
     <main className={`content-page ${styles.page}`}>
@@ -61,7 +61,7 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
           Fredriks middagsandel to ganger. Valgfritt treningsdrivstoff er ikke med.
         </p>
         <p className={styles.dateRange}>
-          {hasRangeError ? "Rett datoene for å vise handlelisten." : list.period.label}
+          {hasRangeError ? "Rett datoene for å vise handlelisten." : list.range.label}
         </p>
       </header>
 
