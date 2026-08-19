@@ -37,6 +37,17 @@ const crossWeekDinnerSources = new Set(
 );
 assert(crossWeekDinnerSources.size === 2, "En datoperiode skal kunne krysse ukegrensen");
 
+const singleDayList = getGroceryListForDateRange(
+  new Date("2026-07-21T12:00:00Z"),
+  new Date("2026-07-21T18:00:00Z"),
+);
+const singleDayDinnerSources = new Set(
+  singleDayList.lines.flatMap((line) =>
+    line.sources.filter((source) => source.endsWith("middag")),
+  ),
+);
+assert(singleDayDinnerSources.size === 1, "En enkeltdato skal inkluderes nøyaktig én gang");
+
 const yearBoundaryList = getGroceryListForDateRange(
   new Date("2026-12-28T00:00:00Z"),
   new Date("2027-01-10T00:00:00Z"),
@@ -70,6 +81,20 @@ const fourWeekEggs = getRequiredNumber(fourWeekList, "egg");
 assert(
   fourWeekEggs === twoWeekEggs * 2,
   "Flere komplette rotasjoner skal skalere mengdene uten en kunstig datogrense",
+);
+
+const twoWeekList = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-08-02T00:00:00Z"),
+);
+const partialRotationList = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-08-04T00:00:00Z"),
+);
+assert(
+  getRequiredNumber(partialRotationList, "egg") ===
+    getRequiredNumber(twoWeekList, "egg") + getRequiredNumber(singleDayList, "egg"),
+  "En delvis ekstra rotasjon skal bare legge til dagene som er med i perioden",
 );
 
 for (const list of lists) {

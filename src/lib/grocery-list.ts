@@ -17,6 +17,7 @@ import {
   getCurrentPlanWeeks,
   getFredrikDaytimePlan,
   getPlanDaysInRange,
+  normalizeToUtcDate,
   type DatedPlanDay,
   type DatedPlanWeek,
 } from "./meal-plan";
@@ -151,19 +152,24 @@ export function getWeeklyGroceryList(
 }
 
 export function getGroceryListForDateRange(start: Date, end: Date): GroceryList {
-  const dayCount = Math.floor((end.getTime() - start.getTime()) / 86_400_000) + 1;
+  const normalizedStart = normalizeToUtcDate(start);
+  const normalizedEnd = normalizeToUtcDate(end);
+  const dayCount =
+    Math.floor((normalizedEnd.getTime() - normalizedStart.getTime()) / 86_400_000) + 1;
 
   if (dayCount < 1) {
     throw new Error("Startdato må være før eller lik sluttdato");
   }
 
   const rotationDays = 14;
-  const patternEnd = new Date(start);
-  patternEnd.setUTCDate(patternEnd.getUTCDate() + Math.min(dayCount, rotationDays) - 1);
-  const pattern = getPlanDaysInRange(start, patternEnd);
+  const rotationSegmentEnd = new Date(normalizedStart);
+  rotationSegmentEnd.setUTCDate(
+    rotationSegmentEnd.getUTCDate() + Math.min(dayCount, rotationDays) - 1,
+  );
+  const rotationSegment = getPlanDaysInRange(normalizedStart, rotationSegmentEnd);
   const completeRotations = Math.floor(dayCount / rotationDays);
   const remainingDays = dayCount % rotationDays;
-  const contributions = pattern.flatMap((day, index) => {
+  const contributions = rotationSegment.flatMap((day, index) => {
     const occurrences = completeRotations + (index < remainingDays ? 1 : 0);
     return getDayContributions(day).map((contribution) => ({
       ...contribution,
@@ -175,9 +181,9 @@ export function getGroceryListForDateRange(start: Date, end: Date): GroceryList 
 
   return {
     period: {
-      startDate: start.toISOString().slice(0, 10),
-      endDate: end.toISOString().slice(0, 10),
-      label: formatDateRange(start, end),
+      startDate: normalizedStart.toISOString().slice(0, 10),
+      endDate: normalizedEnd.toISOString().slice(0, 10),
+      label: formatDateRange(normalizedStart, normalizedEnd),
     },
     lines: aggregateContributions(contributions),
   };

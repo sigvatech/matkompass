@@ -35,7 +35,8 @@ export default async function GroceryListPage({ searchParams }: GroceryListPageP
   const weeklyList = selection === "current" ? currentList : nextList;
   const startValue = getStringParam(params.fra);
   const endValue = getStringParam(params.til);
-  const customRange = getCustomRange(startValue, endValue);
+  const hasDuplicateRangeParams = Array.isArray(params.fra) || Array.isArray(params.til);
+  const customRange = getCustomRange(startValue, endValue, hasDuplicateRangeParams);
   const list = customRange.range
     ? getGroceryListForDateRange(customRange.range.start, customRange.range.end)
     : weeklyList;
@@ -146,10 +147,18 @@ function getStringParam(value: string | string[] | undefined): string | undefine
   return typeof value === "string" ? value : undefined;
 }
 
-function getCustomRange(startValue?: string, endValue?: string): {
+function getCustomRange(
+  startValue: string | undefined,
+  endValue: string | undefined,
+  hasDuplicateParams: boolean,
+): {
   range?: { start: Date; end: Date };
   error?: string;
 } {
+  if (hasDuplicateParams) {
+    return { error: "Bruk bare én startdato og én sluttdato." };
+  }
+
   if (startValue === undefined && endValue === undefined) {
     return {};
   }

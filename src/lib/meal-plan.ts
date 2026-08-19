@@ -197,21 +197,34 @@ export function getCurrentPlanWeeks(now = new Date()): [DatedPlanWeek, DatedPlan
 }
 
 export function getPlanDaysInRange(start: Date, end: Date): DatedPlanDay[] {
-  if (start > end) {
+  const normalizedStart = normalizeToUtcDate(start);
+  const normalizedEnd = normalizeToUtcDate(end);
+
+  if (normalizedStart > normalizedEnd) {
     throw new Error("Startdato må være før eller lik sluttdato");
   }
 
   const days: DatedPlanDay[] = [];
-  let monday = startOfWeek(start);
+  let monday = startOfWeek(normalizedStart);
 
-  while (monday <= end) {
+  while (monday <= normalizedEnd) {
     days.push(
-      ...createPlanWeek(monday).days.filter((day) => day.date >= start && day.date <= end),
+      ...createPlanWeek(monday).days.filter(
+        (day) => day.date >= normalizedStart && day.date <= normalizedEnd,
+      ),
     );
     monday = addDays(monday, 7);
   }
 
   return days;
+}
+
+export function normalizeToUtcDate(date: Date): Date {
+  if (Number.isNaN(date.getTime())) {
+    throw new Error("Ugyldig dato");
+  }
+
+  return new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()));
 }
 
 export function getTodayInOslo(now = new Date()): Date {
