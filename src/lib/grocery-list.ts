@@ -8,7 +8,7 @@ import {
 } from "../content/grocery-catalog";
 import { retailers, type RetailerId } from "../content/retailers";
 import {
-  fredrikDinnerAdditions,
+  fredrikAfterDinnerAdditions,
   type FoodId,
   type IngredientAmount,
   type PlannedMeal,
@@ -163,12 +163,12 @@ function getDayContributions(day: DatedPlanDay): GroceryContribution[] {
       : [],
   );
   const dinner = getDinnerContributions(day.dinner, `${day.profile.name} · middag`);
-  const dinnerAdditions = (fredrikDinnerAdditions[day.profile.name] ?? []).map(
+  const afterDinnerAdditions = (fredrikAfterDinnerAdditions[day.profile.name] ?? []).map(
     (ingredient) =>
       getPlanContribution(ingredient, `${day.profile.name} · Fredriks sjokolade`),
   );
 
-  return [...daytime, ...dinner, ...dinnerAdditions];
+  return [...daytime, ...dinner, ...afterDinnerAdditions];
 }
 
 function getMealContributions(

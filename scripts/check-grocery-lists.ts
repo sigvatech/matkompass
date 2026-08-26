@@ -83,6 +83,12 @@ for (const list of lists) {
     `Uke ${list.week.weekNumber} skal kjøpe én plate mørk sjokolade til Fredrik`,
   );
   assert(
+    !list.lines
+      .find((line) => line.id === "avocado")
+      ?.sources.some((source) => /Tirsdag|Onsdag|Fredag/.test(source)),
+    `Uke ${list.week.weekNumber} kjøper fortsatt avokado til Fredriks lunsjer`,
+  );
+  assert(
     !list.lines.some((line) => line.id === "tuna"),
     `Uke ${list.week.weekNumber} kjøper tunfisk til tomme kontormåltider`,
   );

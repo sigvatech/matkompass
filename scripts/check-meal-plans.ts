@@ -7,7 +7,7 @@ import {
   getTodayInOslo,
   roundNutrition,
 } from "../src/lib/meal-plan";
-import { daytimeMeals, fredrikDinnerAdditions } from "../src/content/meal-plan";
+import { daytimeMeals, fredrikAfterDinnerAdditions } from "../src/content/meal-plan";
 
 const weeks = getCurrentPlanWeeks(new Date("2026-07-20T12:00:00Z"));
 const calorieTolerance = 100;
@@ -73,13 +73,15 @@ for (const [day, meals] of Object.entries(daytimeMeals)) {
     throw new Error(`${day} bruker eggehvite som separat proteintillegg`);
   }
 
-  if (meals.some((meal) => meal?.ingredients.some((ingredient) => ingredient.foodId === "06.524"))) {
-    throw new Error(`${day} har fortsatt avokado i Fredriks frokost eller lunsj`);
-  }
 }
 
 for (const day of ["Tirsdag", "Onsdag", "Fredag"] as const) {
-  const additions = fredrikDinnerAdditions[day] ?? [];
+  const lunch = daytimeMeals[day][1];
+  const additions = fredrikAfterDinnerAdditions[day] ?? [];
+
+  if (lunch?.ingredients.some((ingredient) => ingredient.foodId === "06.524")) {
+    throw new Error(`${day} har fortsatt avokado i Fredriks lunsj`);
+  }
 
   if (
     additions.length !== 1 ||

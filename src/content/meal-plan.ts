@@ -189,7 +189,7 @@ const hormoneHarmonyBowl = (
     { foodId: "06.035", grams: 100, label: "grønnkål" },
     { foodId: "08.112", grams: 14, label: "olivenolje" },
   ],
-  omittedRecipeGroceryItems: ["salmon"],
+  omittedRecipeGroceryItems: ["salmon", "avocado"],
   details,
 });
 
@@ -210,26 +210,26 @@ const weekendProteinWaffles: PlannedMeal = {
   ],
 };
 
-export const fredrikDinnerAdditions: Partial<Record<DayName, IngredientAmount[]>> = {
+export const fredrikAfterDinnerAdditions: Partial<Record<DayName, IngredientAmount[]>> = {
   Tirsdag: [
     {
       foodId: "oda-68777",
       grams: 23,
-      label: "Kolonihagen mørk sjokolade 85 % etter middagen",
+      label: "Kolonihagen økologisk mørk sjokolade 85 % etter middagen",
     },
   ],
   Onsdag: [
     {
       foodId: "oda-68777",
       grams: 23,
-      label: "Kolonihagen mørk sjokolade 85 % etter middagen",
+      label: "Kolonihagen økologisk mørk sjokolade 85 % etter middagen",
     },
   ],
   Fredag: [
     {
       foodId: "oda-68777",
       grams: 23,
-      label: "Kolonihagen mørk sjokolade 85 % etter middagen",
+      label: "Kolonihagen økologisk mørk sjokolade 85 % etter middagen",
     },
   ],
 };

@@ -2,7 +2,7 @@ import {
   dayProfiles,
   daytimeMeals,
   dinnerRotation,
-  fredrikDinnerAdditions,
+  fredrikAfterDinnerAdditions,
   fredrikFuelTrial,
   mealPlanNutritionMetadata,
   nutritionTargets,
@@ -164,17 +164,17 @@ export function getFredrikPlanDay(day: DatedPlanDay): FredrikPlanDay {
     meal ? [createFredrikMeal(daytimeMealTimes[index], meal)] : [],
   );
 
-  const dinnerIngredients = [
+  const eveningMealIngredients = [
     ...getFredrikDinnerIngredients(day.dinner),
-    ...resolveIngredientLabels(fredrikDinnerAdditions[day.profile.name] ?? []),
+    ...resolveIngredientLabels(fredrikAfterDinnerAdditions[day.profile.name] ?? []),
   ];
   meals.push({
     time: "Kl. 17",
     title: day.dinner.title,
     href: day.dinner.href,
-    ingredients: dinnerIngredients,
+    ingredients: eveningMealIngredients,
     details: undefined,
-    nutrition: calculateNutrition(dinnerIngredients),
+    nutrition: calculateNutrition(eveningMealIngredients),
     nutritionTracked: true,
   });
 
