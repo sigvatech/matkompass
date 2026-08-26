@@ -116,7 +116,7 @@ export default async function FredrikWeekPlanPage() {
             <ul>
               <li>Stek dobbel eggerørebase med ytrefilet.</li>
               <li>Lag to hormonbalanseboller med kylling.</li>
-              <li>Sett onsdagsporsjonene raskt kaldt og oppbevar avokadoen separat.</li>
+              <li>Sett onsdagsporsjonene raskt kaldt.</li>
             </ul>
           </section>
           <section>

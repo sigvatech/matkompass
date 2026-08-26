@@ -47,6 +47,16 @@ export const groceryCatalog = {
   "coconut-aminos": item("Kokosaminos", "Oljer og sauser", "check", "ml", 50),
   "coconut-milk": item("Kokosmelk", "Hermetikk", "buy", "ml", 100, { gramsPerMl: 1 }, 400),
   "coconut-oil": item("Kokosolje", "Oljer og sauser", "check", "g", 50),
+  "dark-chocolate-85": item(
+    "Kolonihagen økologisk mørk sjokolade 85 %",
+    "Tørrvarer",
+    "buy",
+    "g",
+    90,
+    undefined,
+    90,
+    "Kolonihagen økologisk mørk sjokolade 85%",
+  ),
   coriander: item("Koriander", "Frukt og grønt", "buy", "stk", 1),
   "cottage-cheese": item("Cottage cheese", "Kjøl og egg", "buy", "g", 100, undefined, 400),
   cucumber: item("Agurk", "Frukt og grønt", "buy", "stk", 1, { gramsPerEach: 300 }),
@@ -140,6 +150,7 @@ function item(
   roundTo: number,
   conversion?: GroceryCatalogItem["conversion"],
   packageSize?: number,
+  searchTerm?: string,
 ): GroceryCatalogItem {
   return {
     label,
@@ -149,5 +160,6 @@ function item(
     roundTo,
     packageSize,
     conversion,
+    searchTerm,
   };
 }

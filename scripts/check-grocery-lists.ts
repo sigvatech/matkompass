@@ -51,6 +51,7 @@ for (const list of lists) {
   const garlic = list.lines.find((line) => line.id === "garlic");
   const eggs = list.lines.find((line) => line.id === "egg");
   const bananas = list.lines.find((line) => line.id === "banana");
+  const darkChocolate = list.lines.find((line) => line.id === "dark-chocolate-85");
   const dinnerSources = new Set(
     list.lines.flatMap((line) => line.sources.filter((source) => source.endsWith("middag"))),
   );
@@ -75,6 +76,11 @@ for (const list of lists) {
   assert(
     bananas?.requiredLabel === "4 stk",
     `Uke ${list.week.weekNumber} skalerer ikke helgevaflene til familien`,
+  );
+  assert(
+    darkChocolate?.requiredLabel === "69 g" &&
+      darkChocolate.purchaseLabel === "90 g",
+    `Uke ${list.week.weekNumber} skal kjøpe én plate mørk sjokolade til Fredrik`,
   );
   assert(
     !list.lines.some((line) => line.id === "tuna"),
