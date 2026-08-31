@@ -7,10 +7,11 @@ import {
   type PurchaseUnit,
 } from "../content/grocery-catalog";
 import { retailers, type RetailerId } from "../content/retailers";
-import type {
-  FoodId,
-  IngredientAmount,
-  PlannedMeal,
+import {
+  fredrikAfterDinnerAdditions,
+  type FoodId,
+  type IngredientAmount,
+  type PlannedMeal,
 } from "../content/meal-plan";
 import {
   formatDateRange,
@@ -118,6 +119,7 @@ const planFoodMappings: Partial<Record<FoodId, GroceryItemId>> = {
   "08.249": "coconut-oil",
   "08.252": "ghee",
   "09.003": "honey",
+  "oda-68777": "dark-chocolate-85",
 };
 
 export function getWeeklyGroceryList(
@@ -161,8 +163,12 @@ function getDayContributions(day: DatedPlanDay): GroceryContribution[] {
       : [],
   );
   const dinner = getDinnerContributions(day.dinner, `${day.profile.name} · middag`);
+  const afterDinnerAdditions = (fredrikAfterDinnerAdditions[day.profile.name] ?? []).map(
+    (ingredient) =>
+      getPlanContribution(ingredient, `${day.profile.name} · Fredriks sjokolade`),
+  );
 
-  return [...daytime, ...dinner];
+  return [...daytime, ...dinner, ...afterDinnerAdditions];
 }
 
 function getMealContributions(

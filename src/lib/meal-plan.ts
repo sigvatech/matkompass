@@ -2,6 +2,7 @@ import {
   dayProfiles,
   daytimeMeals,
   dinnerRotation,
+  fredrikAfterDinnerAdditions,
   fredrikFuelTrial,
   mealPlanNutritionMetadata,
   nutritionTargets,
@@ -12,6 +13,7 @@ import {
   type PlannedMeal,
 } from "../content/meal-plan";
 import { foodDataSource, foods } from "../content/matvaretabellen.generated";
+import { productFoods } from "../content/product-foods";
 import {
   resolveRecipeReference,
   type ResolvedRecipeReference,
@@ -70,7 +72,7 @@ const dinnerShares = {
   Kamilla: 0.5,
 } as const;
 
-const foodsById = new Map(foods.map((food) => [food.id, food]));
+const foodsById = new Map([...foods, ...productFoods].map((food) => [food.id, food]));
 const rotationEpoch = Date.UTC(2026, 6, 20);
 const millisecondsPerWeek = 7 * 86_400_000;
 
@@ -162,14 +164,17 @@ export function getFredrikPlanDay(day: DatedPlanDay): FredrikPlanDay {
     meal ? [createFredrikMeal(daytimeMealTimes[index], meal)] : [],
   );
 
-  const dinnerIngredients = getFredrikDinnerIngredients(day.dinner);
+  const eveningMealIngredients = [
+    ...getFredrikDinnerIngredients(day.dinner),
+    ...resolveIngredientLabels(fredrikAfterDinnerAdditions[day.profile.name] ?? []),
+  ];
   meals.push({
     time: "Kl. 17",
     title: day.dinner.title,
     href: day.dinner.href,
-    ingredients: dinnerIngredients,
+    ingredients: eveningMealIngredients,
     details: undefined,
-    nutrition: calculateNutrition(dinnerIngredients),
+    nutrition: calculateNutrition(eveningMealIngredients),
     nutritionTracked: true,
   });
 

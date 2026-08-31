@@ -7,7 +7,7 @@ import {
   getTodayInOslo,
   roundNutrition,
 } from "../src/lib/meal-plan";
-import { daytimeMeals } from "../src/content/meal-plan";
+import { daytimeMeals, fredrikAfterDinnerAdditions } from "../src/content/meal-plan";
 
 const weeks = getCurrentPlanWeeks(new Date("2026-07-20T12:00:00Z"));
 const calorieTolerance = 100;
@@ -71,6 +71,24 @@ if (!fredriksSteak || Math.abs(fredriksSteak.grams - 224.825) > 0.0001) {
 for (const [day, meals] of Object.entries(daytimeMeals)) {
   if (meals.some((meal) => meal?.ingredients.some((ingredient) => ingredient.foodId === "02.002"))) {
     throw new Error(`${day} bruker eggehvite som separat proteintillegg`);
+  }
+
+}
+
+for (const day of ["Tirsdag", "Onsdag", "Fredag"] as const) {
+  const lunch = daytimeMeals[day][1];
+  const additions = fredrikAfterDinnerAdditions[day] ?? [];
+
+  if (lunch?.ingredients.some((ingredient) => ingredient.foodId === "06.524")) {
+    throw new Error(`${day} har fortsatt avokado i Fredriks lunsj`);
+  }
+
+  if (
+    additions.length !== 1 ||
+    additions[0].foodId !== "oda-68777" ||
+    additions[0].grams !== 23
+  ) {
+    throw new Error(`${day} mangler 23 g av den valgte mørke sjokoladen`);
   }
 }
 

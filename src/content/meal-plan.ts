@@ -1,8 +1,11 @@
 import { foods } from "./matvaretabellen.generated";
+import { productFoods } from "./product-foods";
 import type { RecipeReference } from "../lib/recipes";
 import type { GroceryItemId } from "./grocery-catalog";
 
-export type FoodId = (typeof foods)[number]["id"];
+export type FoodId =
+  | (typeof foods)[number]["id"]
+  | (typeof productFoods)[number]["id"];
 
 export interface IngredientAmount {
   foodId: FoodId;
@@ -112,7 +115,7 @@ export const nutritionTargets = {
 } as const;
 
 export const mealPlanNutritionMetadata = {
-  calculatedAt: "2026-08-17",
+  calculatedAt: "2026-08-25",
   notes: [
     "Dager med full måltidsplan ligger rundt 1 950 kcal med minst 160 g protein.",
     "Oppskriftenes kjerneingredienser og fettmengder beholdes. Karbohydrat maksimeres deretter, med omtrent 200 g som et mykt mål.",
@@ -122,6 +125,7 @@ export const mealPlanNutritionMetadata = {
     "Kyllinglår med skinn bruker kyllinglår uten skinn som nærmeste tilgjengelige Matvaretabellen-verdi.",
     "Lørdagens eggerøre lages dobbelt, og søndagsporsjonen kjøles raskt ned. Proteinvaflene lages til hele familien begge helgedager.",
     "Frokost og lunsj er ikke planlagt mandag og torsdag; bare middagen er medregnet i dagens makrototal og handleliste.",
+    "Kolonihagen økologisk mørk sjokolade 85 % er beregnet fra produktets næringsdeklarasjon hos Oda.",
   ],
 } as const;
 
@@ -183,10 +187,9 @@ const hormoneHarmonyBowl = (
     },
     { foodId: "06.136", grams: sweetPotato, label: "søtpotet" },
     { foodId: "06.035", grams: 100, label: "grønnkål" },
-    { foodId: "06.524", grams: 75, label: "avokado" },
     { foodId: "08.112", grams: 14, label: "olivenolje" },
   ],
-  omittedRecipeGroceryItems: ["salmon"],
+  omittedRecipeGroceryItems: ["salmon", "avocado"],
   details,
 });
 
@@ -204,6 +207,30 @@ const weekendProteinWaffles: PlannedMeal = {
   details: [
     "Mengdene viser Fredriks porsjon. Handlelisten skalerer vaflene til to voksne.",
     "Avkjøl vaflene på rist før de pakkes, og hold cottage cheese kald frem til servering.",
+  ],
+};
+
+export const fredrikAfterDinnerAdditions: Partial<Record<DayName, IngredientAmount[]>> = {
+  Tirsdag: [
+    {
+      foodId: "oda-68777",
+      grams: 23,
+      label: "Kolonihagen økologisk mørk sjokolade 85 % etter middagen",
+    },
+  ],
+  Onsdag: [
+    {
+      foodId: "oda-68777",
+      grams: 23,
+      label: "Kolonihagen økologisk mørk sjokolade 85 % etter middagen",
+    },
+  ],
+  Fredag: [
+    {
+      foodId: "oda-68777",
+      grams: 23,
+      label: "Kolonihagen økologisk mørk sjokolade 85 % etter middagen",
+    },
   ],
 };
 
