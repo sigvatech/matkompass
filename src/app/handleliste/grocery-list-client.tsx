@@ -2,14 +2,14 @@
 
 import styles from "./grocery-list.module.css";
 import type {
+  GroceryList,
   GroceryListLine,
   GroceryRetailerOffer,
-  WeeklyGroceryList,
 } from "@/lib/grocery-list";
 import { startTransition, useEffect, useState } from "react";
 
 interface GroceryListClientProps {
-  list: WeeklyGroceryList;
+  list: GroceryList;
 }
 
 type SortMode = "store" | "category" | "alphabetical";
@@ -30,7 +30,9 @@ const sectionLabels = {
 const sectionOrder = { buy: 0, check: 1, optional: 2 } as const;
 
 export function GroceryListClient({ list }: GroceryListClientProps) {
-  const checkedStorageKey = `matkompass:grocery-checked:${list.week.startDate}:v1`;
+  const checkedStorageKey = "week" in list
+    ? `matkompass:grocery-checked:${list.range.startDate}:v1`
+    : `matkompass:grocery-checked:${list.range.startDate}:${list.range.endDate}:v1`;
   const [sortMode, setSortMode] = useState<SortMode>("store");
   const [preferences, setPreferences] = useState<OfferPreferences>({});
   const [checkedItems, setCheckedItems] = useState<CheckedItems>({});
@@ -64,11 +66,11 @@ export function GroceryListClient({ list }: GroceryListClientProps) {
   }
 
   return (
-    <section className={styles.listSection} aria-labelledby="ukens-varer">
+    <section className={styles.listSection} aria-labelledby="periodens-varer">
       <header className={styles.toolbar}>
         <div>
           <p className="eyebrow">{completedCount} av {displayLines.length} håndtert</p>
-          <h2 id="ukens-varer">Ukens varer</h2>
+          <h2 id="periodens-varer">Varer for perioden</h2>
         </div>
         <div className={styles.toolbarActions}>
           <button

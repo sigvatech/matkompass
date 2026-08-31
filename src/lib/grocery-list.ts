@@ -17,6 +17,8 @@ import {
   formatDateRange,
   getCurrentPlanWeeks,
   getFredrikDaytimePlan,
+  getPlanDaysInRange,
+  normalizeToUtcDate,
   type DatedPlanDay,
   type DatedPlanWeek,
 } from "./meal-plan";
@@ -54,14 +56,20 @@ export interface GroceryListLine {
   defaultOfferId: string;
 }
 
-export interface WeeklyGroceryList {
+export interface GroceryList {
+  range: {
+    startDate: string;
+    endDate: string;
+    label: string;
+  };
+  lines: GroceryListLine[];
+}
+
+export interface WeeklyGroceryList extends GroceryList {
   week: {
     type: "A" | "B";
     weekNumber: number;
-    startDate: string;
-    dateRange: string;
   };
-  lines: GroceryListLine[];
 }
 
 interface GroceryContribution {
@@ -132,13 +140,54 @@ export function getWeeklyGroceryList(
   const lines = aggregateContributions(contributions);
 
   return {
+    range: {
+      startDate: week.start.toISOString().slice(0, 10),
+      endDate: week.end.toISOString().slice(0, 10),
+      label: formatDateRange(week.start, week.end),
+    },
     week: {
       type: week.type,
       weekNumber: week.weekNumber,
-      startDate: week.start.toISOString().slice(0, 10),
-      dateRange: formatDateRange(week.start, week.end),
     },
     lines,
+  };
+}
+
+export function getGroceryListForDateRange(start: Date, end: Date): GroceryList {
+  const normalizedStart = normalizeToUtcDate(start);
+  const normalizedEnd = normalizeToUtcDate(end);
+  const dayCount =
+    Math.floor((normalizedEnd.getTime() - normalizedStart.getTime()) / 86_400_000) + 1;
+
+  if (dayCount < 1) {
+    throw new Error("Startdato må være før eller lik sluttdato");
+  }
+
+  const rotationDays = 14;
+  const rotationSegmentEnd = new Date(normalizedStart);
+  rotationSegmentEnd.setUTCDate(
+    rotationSegmentEnd.getUTCDate() + Math.min(dayCount, rotationDays) - 1,
+  );
+  const rotationSegment = getPlanDaysInRange(normalizedStart, rotationSegmentEnd);
+  const completeRotations = Math.floor(dayCount / rotationDays);
+  const remainingDays = dayCount % rotationDays;
+  const contributions = rotationSegment.flatMap((day, index) => {
+    const occurrences = completeRotations + (index < remainingDays ? 1 : 0);
+    return getDayContributions(day).map((contribution) => ({
+      ...contribution,
+      amount: contribution.amount === null
+        ? null
+        : contribution.amount * occurrences,
+    }));
+  });
+
+  return {
+    range: {
+      startDate: normalizedStart.toISOString().slice(0, 10),
+      endDate: normalizedEnd.toISOString().slice(0, 10),
+      label: formatDateRange(normalizedStart, normalizedEnd),
+    },
+    lines: aggregateContributions(contributions),
   };
 }
 

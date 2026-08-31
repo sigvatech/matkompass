@@ -1,5 +1,6 @@
 import { retailers } from "../src/content/retailers";
 import {
+  getGroceryListForDateRange,
   getWeeklyGroceryList,
   validateGroceryConfiguration,
 } from "../src/lib/grocery-list";
@@ -15,6 +16,96 @@ const lists = [
 
 assert(lists[0].week.type === "A", "Referanseuken skal være plan A");
 assert(lists[1].week.type === "B", "Neste referanseuke skal være plan B");
+
+const sameWeekList = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-07-26T00:00:00Z"),
+);
+assert(
+  JSON.stringify(sameWeekList.lines) === JSON.stringify(lists[0].lines),
+  "En datoperiode på sju dager skal gi samme handleliste som ukevisningen",
+);
+
+const crossWeekList = getGroceryListForDateRange(
+  new Date("2026-07-26T00:00:00Z"),
+  new Date("2026-07-27T00:00:00Z"),
+);
+const crossWeekDinnerSources = new Set(
+  crossWeekList.lines.flatMap((line) =>
+    line.sources.filter((source) => source.endsWith("middag")),
+  ),
+);
+assert(crossWeekDinnerSources.size === 2, "En datoperiode skal kunne krysse ukegrensen");
+
+const singleDayList = getGroceryListForDateRange(
+  new Date("2026-07-21T12:00:00Z"),
+  new Date("2026-07-21T18:00:00Z"),
+);
+const singleDayDinnerSources = new Set(
+  singleDayList.lines.flatMap((line) =>
+    line.sources.filter((source) => source.endsWith("middag")),
+  ),
+);
+assert(singleDayDinnerSources.size === 1, "En enkeltdato skal inkluderes nøyaktig én gang");
+
+const earlyYearList = getGroceryListForDateRange(
+  new Date("0099-07-21T12:00:00Z"),
+  new Date("0099-07-21T18:00:00Z"),
+);
+assert(
+  earlyYearList.range.startDate === "0099-07-21" &&
+    earlyYearList.range.endDate === "0099-07-21",
+  "År før 100 skal ikke forskyves til 1900-tallet",
+);
+
+const yearBoundaryList = getGroceryListForDateRange(
+  new Date("2026-12-28T00:00:00Z"),
+  new Date("2027-01-10T00:00:00Z"),
+);
+const boundaryWeeks = [
+  getWeeklyGroceryList("current", new Date("2026-12-28T12:00:00Z")),
+  getWeeklyGroceryList("next", new Date("2026-12-28T12:00:00Z")),
+];
+const expectedBoundaryLines = new Map(
+  boundaryWeeks.flatMap((list) => list.lines).map((line) => [line.id, line]),
+);
+assert(
+  yearBoundaryList.lines.length === expectedBoundaryLines.size,
+  "En datoperiode over årsskiftet skal inneholde begge planukene",
+);
+assert(
+  getRequiredNumber(yearBoundaryList, "egg") ===
+    boundaryWeeks.reduce((total, list) => total + getRequiredNumber(list, "egg"), 0),
+  "En datoperiode over årsskiftet skal summere mengdene fra begge planukene",
+);
+
+const fourWeekList = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-08-16T00:00:00Z"),
+);
+const twoWeekEggs = lists.reduce(
+  (total, list) => total + getRequiredNumber(list, "egg"),
+  0,
+);
+const fourWeekEggs = getRequiredNumber(fourWeekList, "egg");
+assert(
+  fourWeekEggs === twoWeekEggs * 2,
+  "Flere komplette rotasjoner skal skalere mengdene uten en kunstig datogrense",
+);
+
+const twoWeekList = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-08-02T00:00:00Z"),
+);
+const partialRotationList = getGroceryListForDateRange(
+  new Date("2026-07-20T00:00:00Z"),
+  new Date("2026-08-04T00:00:00Z"),
+);
+assert(
+  getRequiredNumber(partialRotationList, "egg") ===
+    getRequiredNumber(twoWeekList, "egg") + getRequiredNumber(singleDayList, "egg"),
+  "En delvis ekstra rotasjon skal bare legge til dagene som er med i perioden",
+);
 
 for (const list of lists) {
   assert(list.lines.length > 30, `Uke ${list.week.weekNumber} har for få dagligvarer`);
@@ -121,4 +212,13 @@ function assert(condition: boolean, message: string): asserts condition {
   if (!condition) {
     throw new Error(message);
   }
+}
+
+function getRequiredNumber(
+  list: { lines: Array<{ id: string; requiredLabel: string }> },
+  id: string,
+): number {
+  return Number.parseFloat(
+    list.lines.find((line) => line.id === id)?.requiredLabel.replace(",", ".") ?? "0",
+  );
 }
